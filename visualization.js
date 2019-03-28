@@ -19,7 +19,7 @@ var visualise = function(data) {
     .style("width", majorVsDepartment_width + majorVsDepartment_margin.left + majorVsDepartment_margin.right)
     .style("height", MajorVsDepartment_height + majorVsDepartment_margin.top + majorVsDepartment_margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + majorVsDepartment_margin.left + "," + majorVsDepartment_margin.right + ")");""
+    .attr("transform", "translate(" + majorVsDepartment_margin.left + "," + majorVsDepartment_margin.top + ")");
 /*  // Boilerplate:
       
   var svg = d3.select("#chart")
