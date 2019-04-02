@@ -7,6 +7,7 @@ $(function() {
 });
 //helper function for merging the data with the same Year, College, and MajorName
 function appendData(array, query) {
+  query.Year = parseInt(query.Year);
   query.Total = parseInt(query.Total);
   query.Male = parseInt(query.Male);
   query.Female = parseInt(query.Female);
@@ -28,7 +29,9 @@ function appendData(array, query) {
 function mergeData(data) {
   var newData = [];
   data.forEach(element => {
-    appendData(newData, element);
+    if (element.Year === "1980" || element.Year === "2018") {
+      appendData(newData, element);
+    }
   });
   return newData;
 }
@@ -40,6 +43,7 @@ function onlyUnique(value, index, self) {
 //main function to visualise data
 function visualise(data) {
   data = mergeData(data);
+  console.log(data);
   majorVsDepartment(data);
   departmentVsCampus(data);
 };
