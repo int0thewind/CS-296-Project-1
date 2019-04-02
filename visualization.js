@@ -2,8 +2,6 @@
 // Using jQuery, read our data and call visualize(...) only once the page is ready:
 $(function() {
   d3.csv("data.csv").then(function(data) {
-    data = mergeData(data);
-    console.log(data);
     visualise(data);
   });
 });
@@ -41,6 +39,7 @@ function onlyUnique(value, index, self) {
 
 //main function to visualise data
 function visualise(data) {
+  data = mergeData(data);
   majorVsDepartment(data);
   departmentVsCampus(data);
 };
