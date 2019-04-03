@@ -1,15 +1,13 @@
 //-------------------------------------------------------
 //              Global variables here
 //-------------------------------------------------------
-var startYear = 1980;
-var endYear = 2018;
+const startYear = 1991;
+const endYear = 2018;
+const maximum = 0.35;
 //to decide which department we want to visualise
 var filterDepartment = function (element) {
-  if (element === undefined) {return false;}
-  return element.College === "LAS"
-        || element.College === "Engineering"
-        || element.College === "Fine and Applied Arts"
-        || element.College === "Business";
+  if (element === undefined) { return false; }
+  return element.College;
 }
 
 //-------------------------------------------------------
@@ -17,8 +15,8 @@ var filterDepartment = function (element) {
 //-------------------------------------------------------
 
 // Using jQuery, read our data and call visualize(...) only once the page is ready:
-$(function() {
-  d3.csv("data.csv").then(function(data) {
+$(function () {
+  d3.csv("data_cleaned.csv").then(function (data) {
     console.time("visulisation time taken");
     visualise(data);
     console.timeEnd("visulisation time taken");
@@ -38,8 +36,8 @@ function appendData(array, query) {
   query.Unknown = parseInt(query.Unknown);
   for (var i = 0; i < array.length; i++) {
     if (array[i].Year === query.Year
-        && array[i].College === query.College
-        && array[i].MajorName === query.MajorName) {
+      && array[i].College === query.College
+      && array[i].MajorName === query.MajorName) {
       array[i].Total += query.Total;
       array[i].Male += query.Male;
       array[i].Female += query.Female;
@@ -53,7 +51,7 @@ function appendData(array, query) {
 function mergeData(data) {
   var newData = [];
   data.forEach(element => {
-    if (element.Year === startYear.toString()|| element.Year === endYear.toString()) {
+    if (element.Year === startYear.toString() || element.Year === endYear.toString()) {
       appendData(newData, element);
     }
   });
@@ -86,14 +84,14 @@ var majorVsDepartment = function (data) {
     .style("width", majorVsDepartment_width + majorVsDepartment_margin.left + majorVsDepartment_margin.right)
     .style("height", MajorVsDepartment_height + majorVsDepartment_margin.top + majorVsDepartment_margin.bottom)
     .append("g")
-    .attr("transform", "translate(" + majorVsDepartment_margin.left + "," + majorVsDepartment_margin.top + ")");
+    .attr("transform", "translate(" + majorVsDepartment_margin.left + "," + majorVsDepartment_margin.bottom + ")");
 }
 
 var departmentVsCampus = function (data) {
   //initialise svg and margins
   var departmentVsCampus_margin = { top: 50, right: 50, bottom: 50, left: 100 };
-  var departmentVsCampus_width = 960 - departmentVsCampus_margin.left - departmentVsCampus_margin.right;
-  var departmentVsCampus_height = 500 - departmentVsCampus_margin.top - departmentVsCampus_margin.bottom;
+  var departmentVsCampus_width = 500 - departmentVsCampus_margin.left - departmentVsCampus_margin.right;
+  var departmentVsCampus_height = 1000 - departmentVsCampus_margin.top - departmentVsCampus_margin.bottom;
 
   var departmentVsCampus_svg = d3.select("#departmentVsCampus")
     .append("svg")
@@ -106,17 +104,25 @@ var departmentVsCampus = function (data) {
 
   var departmentObject = function (element) {
     if (element.Year === startYear) {
-      return {department: element.College, startPopulation: element.Total, endPopulation: 0} ;
+      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total, collegeTotalEnd: 0};
     } else if (element.Year === endYear) {
-      return {department: element.College, startPopulation: 0, endPopulation: element.Total} ;
+      return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total };
     }
     return null;
   }
   var departmentArrayAppender = function (array, query) {
     for (var i = 0; i < array.length; i++) {
       if (array[i].department === query.College) {
-        if (query.Year === startYear) { array[i].startPopulation += query.Total}
-        else if (query.Year === endYear) { array[i].endPopulation += query.Total}
+        if (query.Year === startYear) {
+          array[i].startPopulation += query.Total;
+          array[i].startRatio += query.Male;
+          array[i].collegeTotalStart += query.Total - query.Unknown;
+        }
+        else if (query.Year === endYear) {
+          array[i].endPopulation += query.Total;
+          array[i].endRatio += query.Male;
+          array[i].collegeTotalEnd += query.Total - query.Unknown;
+        }
         return;
       }
     }
@@ -127,17 +133,105 @@ var departmentVsCampus = function (data) {
 
   data.forEach(element => {
     if (element.Year === startYear) { totalStart += element.Total; }
-    else if (element.Year === endYear) { totalEnd += element.Total; }
+    else if (element.Year === endYear) { totalEnd += element.Total;}
     if (filterDepartment(element)) {
       departmentArrayAppender(departmentArray, element);
     }
-  })
+  });
 
   departmentArray.forEach(element => {
     element.startPopulation /= totalStart;
     element.endPopulation /= totalEnd;
-  })
+    element.startRatio /= element.collegeTotalStart;
+    element.endRatio /= element.collegeTotalEnd;
+  });
 
   console.log(departmentArray);
 
+  //Scale
+  var ratioScale = d3.scaleLinear()
+    .domain([0, maximum])
+    .range([departmentVsCampus_height, 0]);
+  var yearScale = d3.scalePoint()
+    .domain([startYear, endYear])
+    .range([0, departmentVsCampus_width]);
+
+  // Axis:
+  // var axisRightVariable = d3.axisRight()
+  //   .scale(ratioScale);
+  // var axisLeftVariable = d3.axisLeft()
+  //   .scale(ratioScale);
+  var axisBottomVariable = d3.axisBottom()
+    .scale(yearScale);
+
+  var axisGroup = departmentVsCampus_svg.append("g");
+  axisGroup
+    .attr("transform", "translate(" + 0 + "," + departmentVsCampus_height + ")")
+    .call(axisBottomVariable);
+
+  // Visual Encoding:
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+  var colorScale = d3.scaleLinear()
+    .domain([0, 1])
+    .range(["#ff0066", "#00ccff"])
+
+  var defs = departmentVsCampus_svg.append("defs");
+  var linearGradient = defs.append("linearGradient")
+    .attr("id", "linear-gradient");
+  //Diagonal gradient
+  linearGradient
+    .attr("x1", "30%")
+    .attr("y1", "30%")
+    .attr("x2", "70%")
+    .attr("y2", "70%");
+  //Set the color for the start (0%)
+  linearGradient.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "red");
+  //Set the color for the end (100%)
+  linearGradient.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "blue");
+    
+
+  departmentVsCampus_svg.selectAll(".slopes")
+    .data(departmentArray)
+    .enter()
+    .append('line')
+    .attr('x1', 0)
+    .attr('x2', departmentVsCampus_width)
+    .attr('y1', function (d, i) {
+      return ratioScale(d.startPopulation);
+    })
+    .attr('y2', function (d, i) {
+      return ratioScale(d.endPopulation);
+    })
+    .attr("stroke-width", 2)
+    .attr('stroke', function (d, i) { return colorScale(d.endRatio); })
+    .attr('opacity', .6);
+
+  departmentVsCampus_svg.selectAll(".points")
+    .data(departmentArray)
+    .enter()
+    .append('circle')
+    .attr('cx', 0)
+    .attr('cy', function (d, i) {
+      return ratioScale(d.startPopulation);
+    })
+    .attr('r', 5)
+    .attr('fill', function(d, i) { return colorScale(d.startRatio); })
+    .attr('opacity', .6)
+
+  departmentVsCampus_svg.selectAll(".points")
+    .data(departmentArray)
+    .enter()
+    .append('circle')
+    .attr('cx', departmentVsCampus_width)
+    .attr('cy', function (d, i) {
+      return ratioScale(d.endPopulation);
+    })
+    .attr('r', 5)
+    .attr('fill', function(d, i) { return colorScale(d.endRatio); })
+    .attr('opacity', .6);;
 }
