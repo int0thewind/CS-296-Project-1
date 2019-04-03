@@ -86,60 +86,58 @@ function visualise(data) {
     .append("g")
     .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
 
-  var collegeData = major(svg, data);
-  departmentVsCampus(svg, data, collegeData);
+  var collegesData = departmentVsCampus(svg, data);
+  var offset = subgraph_width + 50;
+  major(svg, offset, data, collegesData[0]);
 };
 
-var major = function (svg, data, collegeData) {
-  var offset = subgraph_width + 50;
+var major = function (svg, offset, data, collegeData) {
 
-  var departmentObject = function (element) {
+  var majorObject = function (element) {
     if (element.Year === startYear) {
-      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total, collegeTotalEnd: 0 };
+      return { major: element.MajorName, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0 };
     } else if (element.Year === endYear) {
-      return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total };
+      return { major: element.MajorName, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total };
     }
     return null;
   }
-  var departmentArrayAppender = function (array, query) {
+  var majorArrayAppender = function (array, query) {
     //if (query === null) {return;}
     for (var i = 0; i < array.length; i++) {
       //if (array[i] === null) {continue;}
-      if (array[i].department === query.College) {
+      if (collegeData.department === query.College && array[i].major == query.MajorName) {
         if (query.Year === startYear) {
           array[i].startPopulation += query.Total;
           array[i].startRatio += query.Male;
-          array[i].collegeTotalStart += query.Total - query.Unknown;
+          array[i].majorTotalStart += query.Total - query.Unknown;
         }
         else if (query.Year === endYear) {
           array[i].endPopulation += query.Total;
           array[i].endRatio += query.Male;
-          array[i].collegeTotalEnd += query.Total - query.Unknown;
+          array[i].majorTotalEnd += query.Total - query.Unknown;
         }
         return;
       }
     }
-    array.push(departmentObject(query));
+    array.push(majorObject(query));
   }
 
-  var totalStart = 0, totalEnd = 0, departmentArray = [];
+  var totalStart = 0, totalEnd = 0, majorArray = [];
 
   data.forEach(element => {
     if (element.Year === startYear) { totalStart += element.Total; }
     else if (element.Year === endYear) { totalEnd += element.Total; }
-    if (filterDepartment(element)) {
-      departmentArrayAppender(departmentArray, element);
-    }
+    majorArrayAppender(majorArray, element);
   });
 
-  departmentArray.forEach(element => {
+  majorArray.forEach(element => {
     element.startPopulation /= totalStart;
     element.endPopulation /= totalEnd;
-    element.startRatio /= element.collegeTotalStart;
-    element.endRatio /= element.collegeTotalEnd;
+    element.startRatio /= element.majorTotalStart;
+    element.endRatio /= element.majorTotalEnd;
   });
 
-  console.log(departmentArray);
+  console.log(majorArray);
 
   //Scale
   var ratioScale = d3.scaleLinear()
@@ -171,9 +169,9 @@ var major = function (svg, data, collegeData) {
 
   var defs = svg.append("defs");
 
-  departmentArray.forEach(element => {
+  majorArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.collegeTotalEnd.toString(10) + element.collegeTotalStart.toString(10));
+      .attr("id", "linear-gradient" + element.majorTotalEnd.toString(10) + element.majorTotalStart.toString(10));
     //Diagonal gradient
     linearGradient
       .attr("x1", "0%")
@@ -194,12 +192,12 @@ var major = function (svg, data, collegeData) {
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .html(function (d, i) {
-      return d.department;
+      return d.major;
     });
   svg.call(tip);
 
   svg.selectAll(".major_slopes")
-    .data(departmentArray)
+    .data(majorArray)
     .enter()
     .append('line')
     .attr('id', "major_lines")
@@ -213,7 +211,7 @@ var major = function (svg, data, collegeData) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + d.collegeTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.majorTotalEnd.toString(10) + d.majorTotalStart.toString(10) + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
@@ -231,7 +229,7 @@ var major = function (svg, data, collegeData) {
     });
 
   svg.selectAll(".points")
-    .data(departmentArray)
+    .data(majorArray)
     .enter()
     .append('circle')
     .attr('cx', offset)
@@ -243,7 +241,7 @@ var major = function (svg, data, collegeData) {
     .attr('opacity', opacity);
 
   svg.selectAll(".points")
-    .data(departmentArray)
+    .data(majorArray)
     .enter()
     .append('circle')
     .attr('cx', subgraph_width + offset)
@@ -303,7 +301,7 @@ var departmentVsCampus = function (svg, data) {
     element.endRatio /= element.collegeTotalEnd;
   });
 
-  console.log(departmentArray);
+  //console.log(departmentArray);
 
   //Scale
   var ratioScale = d3.scaleLinear()
