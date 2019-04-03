@@ -104,7 +104,7 @@ var departmentVsCampus = function (data) {
 
   var departmentObject = function (element) {
     if (element.Year === startYear) {
-      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total, collegeTotalEnd: 0};
+      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total, collegeTotalEnd: 0 };
     } else if (element.Year === endYear) {
       return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total };
     }
@@ -133,7 +133,7 @@ var departmentVsCampus = function (data) {
 
   data.forEach(element => {
     if (element.Year === startYear) { totalStart += element.Total; }
-    else if (element.Year === endYear) { totalEnd += element.Total;}
+    else if (element.Year === endYear) { totalEnd += element.Total; }
     if (filterDepartment(element)) {
       departmentArrayAppender(departmentArray, element);
     }
@@ -177,23 +177,33 @@ var departmentVsCampus = function (data) {
     .range(["#ff0066", "#00ccff"])
 
   var defs = departmentVsCampus_svg.append("defs");
-  var linearGradient = defs.append("linearGradient")
-    .attr("id", "linear-gradient");
-  //Diagonal gradient
-  linearGradient
-    .attr("x1", "30%")
-    .attr("y1", "30%")
-    .attr("x2", "70%")
-    .attr("y2", "70%");
-  //Set the color for the start (0%)
-  linearGradient.append("stop")
-    .attr("offset", "0%")
-    .attr("stop-color", "red");
-  //Set the color for the end (100%)
-  linearGradient.append("stop")
-    .attr("offset", "100%")
-    .attr("stop-color", "blue");
-    
+
+  departmentArray.forEach(element => {
+    var linearGradient = defs.append(("linearGradient"))
+      .attr("id", "linear-gradient" + element.collegeTotalEnd.toString(10) + element.collegeTotalStart.toString(10));
+    //Diagonal gradient
+    linearGradient
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "0%")
+      .attr("y2", "100%");
+    //Set the color for the start (0%)
+    linearGradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", colorScale(element.startRatio));
+    //Set the color for the end (100%)
+    linearGradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", colorScale(element.endRatio));
+  });
+
+  //Tip
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .html(function (d, i) {
+      return d.department;
+    });
+  departmentVsCampus_svg.call(tip);
 
   departmentVsCampus_svg.selectAll(".slopes")
     .data(departmentArray)
@@ -207,9 +217,13 @@ var departmentVsCampus = function (data) {
     .attr('y2', function (d, i) {
       return ratioScale(d.endPopulation);
     })
-    .attr("stroke-width", 2)
-    .attr('stroke', function (d, i) { return colorScale(d.endRatio); })
-    .attr('opacity', .6);
+    .attr("stroke-width", 3)
+    .attr('stroke', function (d, i) {
+      return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + d.collegeTotalStart.toString(10) + ")"
+    })
+    .attr('opacity', .6)
+    .on('mouseover', tip.show)
+    .on('mouseout', tip.hide);
 
   departmentVsCampus_svg.selectAll(".points")
     .data(departmentArray)
@@ -220,7 +234,7 @@ var departmentVsCampus = function (data) {
       return ratioScale(d.startPopulation);
     })
     .attr('r', 5)
-    .attr('fill', function(d, i) { return colorScale(d.startRatio); })
+    .attr('fill', function (d, i) { return colorScale(d.startRatio); })
     .attr('opacity', .6)
 
   departmentVsCampus_svg.selectAll(".points")
@@ -232,6 +246,8 @@ var departmentVsCampus = function (data) {
       return ratioScale(d.endPopulation);
     })
     .attr('r', 5)
-    .attr('fill', function(d, i) { return colorScale(d.endRatio); })
+    .attr('fill', function (d, i) { return colorScale(d.endRatio); })
     .attr('opacity', .6);;
+
+
 }
