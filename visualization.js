@@ -1,21 +1,21 @@
 //-------------------------------------------------------
 //              Global variables here
 //-------------------------------------------------------
-const startYear = 1991;
+const startYear = 1981;
 const endYear = 2018;
-const maximum = 0.35;
-const strokeWidth = 2;
+const maximum = 0.5;
+const strokeWidth = 3;
 const radius = 4;
 const opacity = 0.6;
 
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
-var width = 2000 - margins.left - margins.right;
+var width = 1500 - margins.left - margins.right;
 var height = 800 - margins.top - margins.bottom;
-var subgraph_width = 200;
+var subgraph_width = 100;
 //to decide which department we want to visualise
 var filterDepartment = function (element) {
   if (element === undefined) { return false; }
-  return true;
+  return element != "Social Work" && element != "iSchool" && element != "VetMed" && element != "Labor and Industrial Relations" && element != "Law";
 }
 
 //-------------------------------------------------------
@@ -87,39 +87,48 @@ function visualise(data) {
     .attr("transform", "translate(" + margins.left + "," + margins.top + ")");
 
   var collegesData = departmentVsCampus(svg, data);
-  var offset = subgraph_width + 50;
-  major(svg, offset, data, collegesData[0]);
+  var offset = 0;
+
+  collegesData.forEach(element => {
+    if (element.collegeTotalStart != 0 && element.collegeTotalEnd != 0) {
+      console.log(element);
+      offset = offset + subgraph_width + 50;
+      major(svg, offset, data, element);
+    }
+  });
 };
 
 var major = function (svg, offset, data, collegeData) {
 
   var majorObject = function (element) {
     if (element.Year === startYear) {
-      return { major: element.MajorName, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0 };
+      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0 };
     } else if (element.Year === endYear) {
-      return { major: element.MajorName, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total };
+      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total };
     }
     return null;
   }
   var majorArrayAppender = function (array, query) {
     //if (query === null) {return;}
-    for (var i = 0; i < array.length; i++) {
-      //if (array[i] === null) {continue;}
-      if (collegeData.department === query.College && array[i].major == query.MajorName) {
-        if (query.Year === startYear) {
-          array[i].startPopulation += query.Total;
-          array[i].startRatio += query.Male;
-          array[i].majorTotalStart += query.Total - query.Unknown;
+    if (collegeData.department === query.College) {
+      for (var i = 0; i < array.length; i++) {
+        //if (array[i] === null) {continue;}
+        if (array[i].major == query.MajorName) {
+          if (query.Year === startYear) {
+            array[i].startPopulationPerCollege += query.Total;
+            array[i].startRatio += query.Male;
+            array[i].majorTotalStart += query.Total - query.Unknown;
+          }
+          else if (query.Year === endYear) {
+            array[i].endPopulationPerCollege += query.Total;
+            array[i].endRatio += query.Male;
+            array[i].majorTotalEnd += query.Total - query.Unknown;
+          }
+          return;
         }
-        else if (query.Year === endYear) {
-          array[i].endPopulation += query.Total;
-          array[i].endRatio += query.Male;
-          array[i].majorTotalEnd += query.Total - query.Unknown;
-        }
-        return;
       }
+      array.push(majorObject(query));
     }
-    array.push(majorObject(query));
   }
 
   var totalStart = 0, totalEnd = 0, majorArray = [];
@@ -131,8 +140,8 @@ var major = function (svg, offset, data, collegeData) {
   });
 
   majorArray.forEach(element => {
-    element.startPopulation /= totalStart;
-    element.endPopulation /= totalEnd;
+    element.startPopulationPerCollege /= collegeData.collegeTotalStart;
+    element.endPopulationPerCollege /= collegeData.collegeTotalEnd;
     element.startRatio /= element.majorTotalStart;
     element.endRatio /= element.majorTotalEnd;
   });
@@ -204,10 +213,10 @@ var major = function (svg, offset, data, collegeData) {
     .attr('x1', offset)
     .attr('x2', subgraph_width + offset)
     .attr('y1', function (d, i) {
-      return ratioScale(d.startPopulation);
+      return ratioScale(d.startPopulationPerCollege);
     })
     .attr('y2', function (d, i) {
-      return ratioScale(d.endPopulation);
+      return ratioScale(d.endPopulationPerCollege);
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
@@ -234,7 +243,7 @@ var major = function (svg, offset, data, collegeData) {
     .append('circle')
     .attr('cx', offset)
     .attr('cy', function (d, i) {
-      return ratioScale(d.startPopulation);
+      return ratioScale(d.startPopulationPerCollege);
     })
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
@@ -246,7 +255,7 @@ var major = function (svg, offset, data, collegeData) {
     .append('circle')
     .attr('cx', subgraph_width + offset)
     .attr('cy', function (d, i) {
-      return ratioScale(d.endPopulation);
+      return ratioScale(d.endPopulationPerCollege);
     })
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.endRatio); })
@@ -281,7 +290,9 @@ var departmentVsCampus = function (svg, data) {
         return;
       }
     }
-    array.push(departmentObject(query));
+    if(filterDepartment(query.College)){
+      array.push(departmentObject(query));
+    }
   }
 
   var totalStart = 0, totalEnd = 0, departmentArray = [];
@@ -325,7 +336,7 @@ var departmentVsCampus = function (svg, data) {
     .call(axisBottomVariable);
 
   // Visual Encoding:
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
+  //var color = d3.scaleOrdinal(d3.schemeCategory10);
 
   var colorScale = d3.scaleLinear()
     .domain([0, 1])
