@@ -105,9 +105,9 @@ var major = function (svg, offset, data, collegeData) {
 
   var majorObject = function (element) {
     if (element.Year === startYear) {
-      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0 };
+      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0, startPopulationPerCampus: element.Total, endPopulationPerCampus: 0 };
     } else if (element.Year === endYear) {
-      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total };
+      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total, startPopulationPerCampus: 0, endPopulationPerCampus: element.Total };
     }
     return null;
   }
@@ -119,11 +119,13 @@ var major = function (svg, offset, data, collegeData) {
         if (array[i].major == query.MajorName) {
           if (query.Year === startYear) {
             array[i].startPopulationPerCollege += query.Total;
+            array[i].startPopulationPerCampus += query.Total;
             array[i].startRatio += query.Male;
             array[i].majorTotalStart += query.Total - query.Unknown;
           }
           else if (query.Year === endYear) {
             array[i].endPopulationPerCollege += query.Total;
+            array[i].endPopulationPerCampus += query.Total;
             array[i].endRatio += query.Male;
             array[i].majorTotalEnd += query.Total - query.Unknown;
           }
@@ -145,8 +147,14 @@ var major = function (svg, offset, data, collegeData) {
   majorArray.forEach(element => {
     element.startPopulationPerCollege /= collegeData.collegeTotalStart;
     element.endPopulationPerCollege /= collegeData.collegeTotalEnd;
+    element.startPopulationPerCampus /= totalStart;
+    element.endPopulationPerCampus /= totalEnd;
     element.startRatio /= element.majorTotalStart;
     element.endRatio /= element.majorTotalEnd;
+    if (isNaN(element.startRatio))
+      element.startRatio = 0.5;
+    if (isNaN(element.endRatio))
+      element.endRatio = 0.5;
   });
 
   console.log(majorArray);
@@ -306,6 +314,10 @@ var departmentVsCampus = function (svg, data) {
     element.endPopulation /= totalEnd;
     element.startRatio /= element.collegeTotalStart;
     element.endRatio /= element.collegeTotalEnd;
+    if (isNaN(element.startRatio))
+      element.startRatio = 0.5;
+    if (isNaN(element.endRatio))
+      element.endRatio = 0.5;
   });
 
   //console.log(departmentArray);
