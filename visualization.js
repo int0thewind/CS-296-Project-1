@@ -10,7 +10,7 @@ const opacity = 0.6;
 //to decide which department we want to visualise
 var filterDepartment = function (element) {
   if (element === undefined) { return false; }
-  return element.College;
+  return true;
 }
 
 //-------------------------------------------------------
@@ -68,11 +68,11 @@ function mergeData(data) {
 //main function to visualise data
 function visualise(data) {
   //console.time is to track the performance of the code
-  console.time("general data merging");
+  //console.time("general data merging");
   data = mergeData(data);
-  console.timeEnd("general data merging");
-  var collegeData = departmentVsCampus(data);
-  majorVsDepartment(data, collegeData);
+  //console.timeEnd("general data merging");
+  var collegeData = majorVsDepartment(data);
+  departmentVsCampus(data, collegeData);
 };
 
 var majorVsDepartment = function (data, collegeData) {
@@ -114,7 +114,9 @@ var departmentVsCampus = function (data) {
     return null;
   }
   var departmentArrayAppender = function (array, query) {
+    //if (query === null) {return;}
     for (var i = 0; i < array.length; i++) {
+      //if (array[i] === null) {continue;}
       if (array[i].department === query.College) {
         if (query.Year === startYear) {
           array[i].startPopulation += query.Total;
