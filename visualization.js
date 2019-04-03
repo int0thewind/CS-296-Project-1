@@ -76,9 +76,9 @@ function visualise(data) {
 };
 
 var majorVsDepartment = function (data, collegeData) {
-  var majorVsDepartment_margin = { top: 50, right: 50, bottom: 50, left: 100 };
-  var majorVsDepartment_width = 960 - majorVsDepartment_margin.left - majorVsDepartment_margin.right;
-  var MajorVsDepartment_height = 500 - majorVsDepartment_margin.top - majorVsDepartment_margin.bottom;
+  var majorVsDepartment_margin = { top: 50, right: 50, bottom: 50, left: 50 };
+  var majorVsDepartment_width = 500 - majorVsDepartment_margin.left - majorVsDepartment_margin.right;
+  var MajorVsDepartment_height = 960 - majorVsDepartment_margin.top - majorVsDepartment_margin.bottom;
 
   var majorVsDepartment_svg = d3.select("#majorVsDepartment")
     .append("svg")
@@ -92,9 +92,9 @@ var majorVsDepartment = function (data, collegeData) {
 
 var departmentVsCampus = function (data) {
   //initialise svg and margins
-  var departmentVsCampus_margin = { top: 50, right: 50, bottom: 50, left: 100 };
+  var departmentVsCampus_margin = { top: 50, right: 50, bottom: 50, left: 50 };
   var departmentVsCampus_width = 500 - departmentVsCampus_margin.left - departmentVsCampus_margin.right;
-  var departmentVsCampus_height = 1000 - departmentVsCampus_margin.top - departmentVsCampus_margin.bottom;
+  var departmentVsCampus_height = 960 - departmentVsCampus_margin.top - departmentVsCampus_margin.bottom;
 
   var departmentVsCampus_svg = d3.select("#departmentVsCampus")
     .append("svg")
