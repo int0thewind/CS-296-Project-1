@@ -10371,7 +10371,6 @@ Year,College,MajorName,Total,Male,Female,Unknown
 2003,Fine and Applied Arts,Architecture,169,116,53,2
 2003,Fine and Applied Arts,Architecture,44,25,19,3
 2003,Fine and Applied Arts,Architecture,4,2,2,0
-2003,Fine and Applied Arts,Art and Design,Art and Design,254,Graphic Design,Art and Design
 2003,Fine and Applied Arts,Art and Design,5,3,2,0
 2003,Fine and Applied Arts,Art and Design,4,2,2,0
 2003,Fine and Applied Arts,Art and Design,11,4,7,1
@@ -10450,7 +10449,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 2003,LAS,English,128,52,76,5
 2003,LAS,Entomology,38,22,16,3
 2003,LAS,French,28,4,24,0
-2003,LAS,GEN CURR,"2,090","1,052","1,038",31
+2003,LAS,GEN CURR,2090,1052,1038,31
 2003,LAS,Geography,40,20,20,0
 2003,LAS,Geology,38,24,14,1
 2003,LAS,Geology,8,4,4,2
@@ -10781,7 +10780,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 2002,LAS,English,129,50,79,5
 2002,LAS,Entomology,36,24,12,1
 2002,LAS,French,30,6,24,0
-2002,LAS,GEN CURR,"2,075",964,"1,111",24
+2002,LAS,GEN CURR,2075,964,1111,24
 2002,LAS,Geography,30,13,17,1
 2002,LAS,Geology,34,21,13,0
 2002,LAS,Geology,11,6,5,1
@@ -11108,7 +11107,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 2001,LAS,English,129,52,77,3
 2001,LAS,Entomology,37,25,12,1
 2001,LAS,French,31,5,26,0
-2001,LAS,GEN CURR,"2,198",994,"1,204",17
+2001,LAS,GEN CURR,2198,994,1204,17
 2001,LAS,Geography,33,16,17,1
 2001,LAS,Geology,33,23,10,0
 2001,LAS,Geology,13,10,3,1
@@ -11370,7 +11369,6 @@ Year,College,MajorName,Total,Male,Female,Unknown
 2000,Fine and Applied Arts,Architecture,4,1,3,0
 2000,Fine and Applied Arts,Architecture,108,72,36,1
 2000,Fine and Applied Arts,Architecture,37,21,16,1
-2000,Fine and Applied Arts,Art and Design,Art and Design,254,Graphic Design,Art and Design
 2000,Fine and Applied Arts,Art and Design,9,9,0,0
 2000,Fine and Applied Arts,Art and Design,6,3,3,0
 2000,Fine and Applied Arts,Art and Design,9,5,4,0
@@ -11443,7 +11441,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 2000,LAS,English,114,44,70,0
 2000,LAS,Entomology,29,18,11,0
 2000,LAS,French,34,4,30,1
-2000,LAS,GEN CURR,"2,459","1,233","1,226",35
+2000,LAS,GEN CURR,2459,1233,1226,35
 2000,LAS,Geography,33,20,13,1
 2000,LAS,Geology,33,23,10,0
 2000,LAS,Geology,21,11,10,0
@@ -11714,7 +11712,6 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1999,Fine and Applied Arts,Architecture,4,3,1,0
 1999,Fine and Applied Arts,Architecture,104,67,37,2
 1999,Fine and Applied Arts,Architecture,35,21,14,2
-1999,Fine and Applied Arts,Art and Design,Art and Design,254,Graphic Design,Art and Design
 1999,Fine and Applied Arts,Art and Design,8,8,0,0
 1999,Fine and Applied Arts,Art and Design,5,3,2,0
 1999,Fine and Applied Arts,Art and Design,10,6,4,0
@@ -11781,7 +11778,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1999,LAS,English,115,43,72,1
 1999,LAS,Entomology,32,21,11,0
 1999,LAS,French,37,9,28,0
-1999,LAS,GEN CURR,"2,838","1,356","1,482",32
+1999,LAS,GEN CURR,2838,1356,1482,32
 1999,LAS,Geography,34,20,14,2
 1999,LAS,Geology,28,21,7,0
 1999,LAS,Geology,27,13,14,1
@@ -12066,7 +12063,6 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1998,Fine and Applied Arts,Architecture,9,6,3,0
 1998,Fine and Applied Arts,Architecture,103,71,32,1
 1998,Fine and Applied Arts,Architecture,41,23,18,2
-1998,Fine and Applied Arts,Art and Design,Art and Design,254,Graphic Design,Art and Design
 1998,Fine and Applied Arts,Art and Design,4,4,0,0
 1998,Fine and Applied Arts,Art and Design,4,2,2,0
 1998,Fine and Applied Arts,Art and Design,3,2,1,0
@@ -12134,7 +12130,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1998,LAS,English,133,52,81,4
 1998,LAS,Entomology,34,20,14,0
 1998,LAS,French,38,13,25,0
-1998,LAS,GEN CURR,"2,706","1,255","1,451",36
+1998,LAS,GEN CURR,2706,1255,1451,36
 1998,LAS,Geography,28,15,13,1
 1998,LAS,Geology,29,15,14,1
 1998,LAS,Geology,20,16,4,0
@@ -12414,7 +12410,6 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1997,Fine and Applied Arts,Architecture,9,6,3,0
 1997,Fine and Applied Arts,Architecture,123,80,43,0
 1997,Fine and Applied Arts,Architecture,55,32,23,3
-1997,Fine and Applied Arts,Art and Design,Art and Design,254,Graphic Design,Art and Design
 1997,Fine and Applied Arts,Art and Design,1,1,0,0
 1997,Fine and Applied Arts,Art and Design,49,25,24,1
 1997,Fine and Applied Arts,Art and Design,74,45,29,3
@@ -12477,7 +12472,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1997,LAS,English,120,48,72,2
 1997,LAS,Entomology,29,18,11,0
 1997,LAS,French,46,11,35,0
-1997,LAS,GEN CURR,"2,372","1,093","1,279",35
+1997,LAS,GEN CURR,2372,1093,1279,35
 1997,LAS,Geography,38,22,16,1
 1997,LAS,Geology,20,14,6,0
 1997,LAS,Geology,31,18,13,1
@@ -12774,7 +12769,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1996,LAS,English,105,43,62,3
 1996,LAS,Entomology,35,22,13,1
 1996,LAS,French,45,14,31,0
-1996,LAS,GEN CURR,"2,509","1,172","1,337",33
+1996,LAS,GEN CURR,2509,1172,1337,33
 1996,LAS,Geography,43,27,16,1
 1996,LAS,Geology,34,21,13,0
 1996,LAS,Geology,26,16,10,1
@@ -12901,7 +12896,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1995,Aviation,Nondegree,9,8,1,1
 1995,Aviation,PP/AS,36,34,2,0
 1995,Aviation,Professional Pilot,151,113,38,4
-1995,Business,Accountancy,"1,027",525,502,5
+1995,Business,Accountancy,1027,525,502,5
 1995,Business,Accountancy,107,56,51,1
 1995,Business,Computer Science,27,17,10,0
 1995,Business,Computer Science,342,292,50,2
@@ -13064,7 +13059,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1995,LAS,English,118,48,70,2
 1995,LAS,Entomology,40,17,23,1
 1995,LAS,French,54,15,39,0
-1995,LAS,GEN CURR,"2,446","1,082","1,364",12
+1995,LAS,GEN CURR,2446,1082,1364,12
 1995,LAS,Geography,42,27,15,1
 1995,LAS,Geology,42,25,17,0
 1995,LAS,Geology,24,14,10,1
@@ -13195,7 +13190,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1994,Aviation,Nondegree,14,14,0,5
 1994,Aviation,PP/AS,77,72,5,3
 1994,Aviation,Professional Pilot,111,81,30,1
-1994,Business,Accountancy,"1,041",525,516,6
+1994,Business,Accountancy,1041,525,516,6
 1994,Business,Accountancy,109,47,62,2
 1994,Business,Computer Science,40,28,12,2
 1994,Business,Computer Science,391,336,55,6
@@ -13265,7 +13260,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1994,Engineering,CER ENGR,8,4,4,0
 1994,Engineering,CERAMIC ENG,7,7,0,0
 1994,Engineering,CERAMICS,4,4,0,0
-1994,Engineering,Electrical Engineering,"1,009",888,121,6
+1994,Engineering,Electrical Engineering,1009,888,121,6
 1994,Engineering,Electrical Engineering,6,5,1,0
 1994,Engineering,Electrical Engineering,71,65,6,0
 1994,Engineering,Electrical Engineering,447,406,41,3
@@ -13353,7 +13348,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1994,LAS,English,133,56,77,1
 1994,LAS,Entomology,36,17,19,1
 1994,LAS,French,60,19,41,2
-1994,LAS,GEN CURR,"2,207","1,002","1,205",10
+1994,LAS,GEN CURR,2207,1002,1205,10
 1994,LAS,Geography,45,32,13,3
 1994,LAS,Geology,44,25,19,2
 1994,LAS,Geology,23,16,7,0
@@ -13486,7 +13481,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1993,Aviation,Nondegree,20,20,0,5
 1993,Aviation,PP/AS,83,73,10,2
 1993,Aviation,Professional Pilot,100,73,27,0
-1993,Business,Accountancy,"1,134",588,546,7
+1993,Business,Accountancy,1134,588,546,7
 1993,Business,Accountancy,125,80,45,2
 1993,Business,Computer Science,36,26,10,5
 1993,Business,Computer Science,388,335,53,4
@@ -13646,7 +13641,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1993,LAS,English,150,65,85,2
 1993,LAS,Entomology,33,14,19,1
 1993,LAS,French,59,15,44,1
-1993,LAS,GEN CURR,"2,073",974,"1,099",18
+1993,LAS,GEN CURR,2073,974,1099,18
 1993,LAS,Geography,38,27,11,2
 1993,LAS,Geology,40,28,12,0
 1993,LAS,Geology,20,14,6,0
@@ -13781,7 +13776,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1992,Aviation,Nondegree,17,14,3,0
 1992,Aviation,PP/AS,84,76,8,2
 1992,Aviation,Professional Pilot,99,78,21,0
-1992,Business,Accountancy,"1,136",573,563,9
+1992,Business,Accountancy,1136,573,563,9
 1992,Business,Accountancy,147,87,60,2
 1992,Business,Computer Science,33,20,13,2
 1992,Business,Computer Science,359,323,36,3
@@ -13942,7 +13937,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1992,LAS,English,142,65,77,2
 1992,LAS,Entomology,28,13,15,0
 1992,LAS,French,59,22,37,1
-1992,LAS,GEN CURR,"2,093",972,"1,121",13
+1992,LAS,GEN CURR,2093,972,1121,13
 1992,LAS,Geography,49,28,21,1
 1992,LAS,Geology,40,27,13,1
 1992,LAS,Geology,19,12,7,0
@@ -14078,7 +14073,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1991,Aviation,Nondegree,19,13,6,3
 1991,Aviation,PP/AS,102,94,8,2
 1991,Aviation,Professional Pilot,75,61,14,0
-1991,Business,Accountancy,"1,138",563,575,4
+1991,Business,Accountancy,1138,563,575,4
 1991,Business,Accountancy,115,63,52,4
 1991,Business,Computer Science,26,18,8,2
 1991,Business,Computer Science,377,333,44,2
@@ -14229,7 +14224,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1991,LAS,English,142,63,79,3
 1991,LAS,Entomology,24,12,12,0
 1991,LAS,French,65,19,46,2
-1991,LAS,GEN CURR,"2,171","1,041","1,130",17
+1991,LAS,GEN CURR,2171,1041,1130,17
 1991,LAS,Geography,49,29,20,5
 1991,LAS,Geology,39,30,9,1
 1991,LAS,Geology,11,7,4,0
@@ -14364,7 +14359,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1990,Aviation,Nondegree,18,17,1,3
 1990,Aviation,PP/AS,108,98,10,0
 1990,Aviation,Professional Pilot,74,59,15,0
-1990,Business,Accountancy,"1,087",553,534,9
+1990,Business,Accountancy,1087,553,534,9
 1990,Business,Accountancy,93,60,33,1
 1990,Business,Computer Science,15,11,4,0
 1990,Business,Computer Science,382,338,44,6
@@ -14424,7 +14419,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1990,Engineering,CER ENGR,10,10,0,0
 1990,Engineering,CER ENGR,52,50,2,2
 1990,Engineering,CERAMICS,4,3,1,0
-1990,Engineering,Electrical Engineering,"1,045",920,125,5
+1990,Engineering,Electrical Engineering,1045,920,125,5
 1990,Engineering,Electrical Engineering,18,16,2,0
 1990,Engineering,Electrical Engineering,81,74,7,0
 1990,Engineering,Electrical Engineering,432,394,38,2
@@ -14513,7 +14508,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1990,LAS,English,127,53,74,0
 1990,LAS,Entomology,27,14,13,1
 1990,LAS,French,55,19,36,2
-1990,LAS,GEN CURR,"2,184","1,089","1,095",13
+1990,LAS,GEN CURR,2184,1089,1095,13
 1990,LAS,Geography,39,21,18,2
 1990,LAS,Geology,41,32,9,0
 1990,LAS,Geology,7,5,2,0
@@ -14711,7 +14706,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1989,Engineering,CER ENGR,6,6,0,0
 1989,Engineering,CER ENGR,49,46,3,0
 1989,Engineering,CERAMICS,2,2,0,0
-1989,Engineering,Electrical Engineering,"1,050",912,138,5
+1989,Engineering,Electrical Engineering,1050,912,138,5
 1989,Engineering,Electrical Engineering,19,18,1,0
 1989,Engineering,Electrical Engineering,84,78,6,0
 1989,Engineering,Electrical Engineering,441,398,43,1
@@ -14803,7 +14798,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1989,LAS,English,130,63,67,3
 1989,LAS,Entomology,19,13,6,1
 1989,LAS,French,51,19,32,1
-1989,LAS,GEN CURR,"2,104",971,"1,133",24
+1989,LAS,GEN CURR,2104,971,1133,24
 1989,LAS,Geography,39,27,12,4
 1989,LAS,Geology,35,29,6,0
 1989,LAS,Geology,8,6,2,0
@@ -14940,7 +14935,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1988,Aviation,Nondegree,12,11,1,3
 1988,Aviation,PP/AS,109,93,16,3
 1988,Aviation,Professional Pilot,59,52,7,1
-1988,Business,Accountancy,"1,019",491,528,8
+1988,Business,Accountancy,1019,491,528,8
 1988,Business,Accountancy,117,63,54,0
 1988,Business,Computer Science,25,10,15,0
 1988,Business,Computer Science,372,332,40,2
@@ -15001,7 +14996,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1988,Engineering,CER ENGR,7,6,1,0
 1988,Engineering,CER ENGR,63,57,6,0
 1988,Engineering,CERAMICS,1,1,0,0
-1988,Engineering,Electrical Engineering,"1,251","1,088",163,1
+1988,Engineering,Electrical Engineering,1251,1088,163,1
 1988,Engineering,Electrical Engineering,29,23,6,0
 1988,Engineering,Electrical Engineering,92,85,7,0
 1988,Engineering,Electrical Engineering,492,449,43,0
@@ -15091,7 +15086,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1988,LAS,English,123,62,61,0
 1988,LAS,Entomology,27,18,9,0
 1988,LAS,French,48,15,33,3
-1988,LAS,GEN CURR,"2,182","1,008","1,174",19
+1988,LAS,GEN CURR,2182,1008,1174,19
 1988,LAS,Genetics,1,1,0,0
 1988,LAS,Geography,34,22,12,2
 1988,LAS,Geology,39,34,5,1
@@ -15290,7 +15285,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1987,Engineering,CER ENGR,5,3,2,0
 1987,Engineering,CER ENGR,9,6,3,0
 1987,Engineering,CER ENGR,64,57,7,0
-1987,Engineering,Electrical Engineering,"1,348","1,171",177,5
+1987,Engineering,Electrical Engineering,1348,1171,177,5
 1987,Engineering,Electrical Engineering,23,16,7,1
 1987,Engineering,Electrical Engineering,104,94,10,0
 1987,Engineering,Electrical Engineering,529,483,46,0
@@ -15379,7 +15374,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1987,LAS,English,115,57,58,2
 1987,LAS,Entomology,32,23,9,0
 1987,LAS,French,46,12,34,2
-1987,LAS,GEN CURR,"2,146",932,"1,214",16
+1987,LAS,GEN CURR,2146,932,1214,16
 1987,LAS,Genetics,2,2,0,0
 1987,LAS,Geography,42,28,14,2
 1987,LAS,Geology,55,41,14,1
@@ -15579,7 +15574,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1986,Engineering,CER ENGR,4,3,1,0
 1986,Engineering,CER ENGR,6,4,2,0
 1986,Engineering,CER ENGR,41,33,8,0
-1986,Engineering,Electrical Engineering,"1,406","1,240",166,8
+1986,Engineering,Electrical Engineering,1406,1240,166,8
 1986,Engineering,Electrical Engineering,27,22,5,0
 1986,Engineering,Electrical Engineering,84,71,13,0
 1986,Engineering,Electrical Engineering,524,480,44,0
@@ -15668,7 +15663,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1986,LAS,English,114,54,60,1
 1986,LAS,Entomology,39,30,9,1
 1986,LAS,French,44,12,32,4
-1986,LAS,GEN CURR,"2,269",956,"1,313",6
+1986,LAS,GEN CURR,2269,956,1313,6
 1986,LAS,Genetics,2,2,0,0
 1986,LAS,Geography,40,29,11,2
 1986,LAS,Geology,50,36,14,0
@@ -15812,7 +15807,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1985,Aviation,Avionics,4,4,0,1
 1985,Aviation,PP/AS,53,50,3,2
 1985,Aviation,Professional Pilot,71,59,12,4
-1985,Business,Accountancy,"1,082",503,579,11
+1985,Business,Accountancy,1082,503,579,11
 1985,Business,Accountancy,130,83,47,5
 1985,Business,Computer Science,57,32,25,1
 1985,Business,Computer Science,313,269,44,6
@@ -15871,7 +15866,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1985,Engineering,CER ENGR,2,1,1,0
 1985,Engineering,CER ENGR,44,37,7,0
 1985,Engineering,CERAMICS,1,0,1,0
-1985,Engineering,Electrical Engineering,"1,373","1,189",184,4
+1985,Engineering,Electrical Engineering,1373,1189,184,4
 1985,Engineering,Electrical Engineering,17,14,3,1
 1985,Engineering,Electrical Engineering,76,58,18,0
 1985,Engineering,Electrical Engineering,479,450,29,2
@@ -15961,7 +15956,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1985,LAS,English,115,54,61,2
 1985,LAS,Entomology,37,30,7,1
 1985,LAS,French,45,8,37,2
-1985,LAS,GEN CURR,"2,284",921,"1,363",13
+1985,LAS,GEN CURR,2284,921,1363,13
 1985,LAS,Genetics,3,2,1,0
 1985,LAS,Geography,45,29,16,2
 1985,LAS,Geology,55,39,16,0
@@ -16109,7 +16104,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1984,Aviation,Air Systems,90,79,11,2
 1984,Aviation,Avionics,11,10,1,5
 1984,Aviation,Professional Pilot,35,30,5,2
-1984,Business,Accountancy,"1,207",578,629,11
+1984,Business,Accountancy,1207,578,629,11
 1984,Business,Accountancy,108,70,38,1
 1984,Business,Computer Science,81,51,30,3
 1984,Business,Computer Science,253,221,32,4
@@ -16166,7 +16161,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1984,Engineering,CER ENGR,113,80,33,0
 1984,Engineering,CER ENGR,2,1,1,0
 1984,Engineering,CER ENGR,41,36,5,0
-1984,Engineering,Electrical Engineering,"1,220","1,054",166,9
+1984,Engineering,Electrical Engineering,1220,1054,166,9
 1984,Engineering,Electrical Engineering,12,9,3,0
 1984,Engineering,Electrical Engineering,68,53,15,0
 1984,Engineering,Electrical Engineering,455,427,28,4
@@ -16252,7 +16247,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1984,LAS,English,114,51,63,9
 1984,LAS,Entomology,37,29,8,3
 1984,LAS,French,40,9,31,3
-1984,LAS,GEN CURR,"2,230",916,"1,314",21
+1984,LAS,GEN CURR,2230,916,1314,21
 1984,LAS,Genetics,4,2,2,0
 1984,LAS,Geography,35,21,14,3
 1984,LAS,Geology,60,42,18,2
@@ -16401,7 +16396,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1983,Aviation,Air Systems,115,102,13,0
 1983,Aviation,Avionics,10,10,0,0
 1983,Aviation,Professional Pilot,15,14,1,0
-1983,Business,Accountancy,"1,392",703,689,4
+1983,Business,Accountancy,1392,703,689,4
 1983,Business,Accountancy,137,88,49,0
 1983,Business,Computer Science,247,215,32,4
 1983,Business,Computer Science,120,81,39,4
@@ -16460,7 +16455,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1983,Engineering,CER ENGR,4,3,1,0
 1983,Engineering,CER ENGR,40,35,5,0
 1983,Engineering,CERAMICS,1,0,1,0
-1983,Engineering,Electrical Engineering,"1,206","1,061",145,4
+1983,Engineering,Electrical Engineering,1206,1061,145,4
 1983,Engineering,Electrical Engineering,7,7,0,0
 1983,Engineering,Electrical Engineering,67,50,17,0
 1983,Engineering,Electrical Engineering,377,357,20,3
@@ -16545,7 +16540,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1983,LAS,English,98,43,55,1
 1983,LAS,Entomology,37,29,8,2
 1983,LAS,French,31,9,22,2
-1983,LAS,GEN CURR,"2,074",841,"1,233",9
+1983,LAS,GEN CURR,2074,841,1233,9
 1983,LAS,Genetics,6,3,3,0
 1983,LAS,Geography,34,25,9,0
 1983,LAS,Geology,61,40,21,0
@@ -16687,7 +16682,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1982,Aviation,Air Systems,135,126,9,1
 1982,Aviation,Avionics,9,9,0,0
 1982,Aviation,Professional Pilot,9,7,2,0
-1982,Business,Accountancy,"1,408",773,635,2
+1982,Business,Accountancy,1408,773,635,2
 1982,Business,Accountancy,146,89,57,1
 1982,Business,Computer Science,212,184,28,2
 1982,Business,Computer Science,106,71,35,0
@@ -16746,7 +16741,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1982,Engineering,CER ENGR,5,4,1,0
 1982,Engineering,CER ENGR,31,24,7,0
 1982,Engineering,CERAMICS,1,0,1,0
-1982,Engineering,Electrical Engineering,"1,128","1,000",128,0
+1982,Engineering,Electrical Engineering,1128,1000,128,0
 1982,Engineering,Electrical Engineering,5,5,0,0
 1982,Engineering,Electrical Engineering,62,48,14,0
 1982,Engineering,Electrical Engineering,317,300,17,2
@@ -16832,7 +16827,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1982,LAS,English,110,50,60,5
 1982,LAS,Entomology,33,26,7,2
 1982,LAS,French,33,10,23,1
-1982,LAS,GEN CURR,"2,182",960,"1,222",5
+1982,LAS,GEN CURR,2182,960,1222,5
 1982,LAS,Genetics,5,2,3,0
 1982,LAS,Geography,36,28,8,0
 1982,LAS,Geology,60,41,19,0
@@ -16972,7 +16967,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1981,Aviation,Air Systems,143,134,9,2
 1981,Aviation,Avionics,10,10,0,0
 1981,Aviation,Professional Pilot,12,9,3,0
-1981,Business,Accountancy,"1,433",816,617,3
+1981,Business,Accountancy,1433,816,617,3
 1981,Business,Accountancy,172,109,63,0
 1981,Business,Computer Science,167,148,19,1
 1981,Business,Computer Science,79,45,34,2
@@ -17028,7 +17023,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1981,Engineering,CER ENGR,3,2,1,0
 1981,Engineering,CER ENGR,35,26,9,0
 1981,Engineering,CERAMICS,3,2,1,0
-1981,Engineering,Electrical Engineering,"1,177","1,043",134,0
+1981,Engineering,Electrical Engineering,1177,1043,134,0
 1981,Engineering,Electrical Engineering,10,9,1,0
 1981,Engineering,Electrical Engineering,48,41,7,1
 1981,Engineering,Electrical Engineering,326,309,17,1
@@ -17116,7 +17111,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1981,LAS,English,101,51,50,2
 1981,LAS,Entomology,28,21,7,1
 1981,LAS,French,33,6,27,0
-1981,LAS,GEN CURR,"2,461","1,103","1,358",5
+1981,LAS,GEN CURR,2461,1103,1358,5
 1981,LAS,Genetics,5,2,3,0
 1981,LAS,Geography,43,30,13,1
 1981,LAS,Geology,63,40,23,0
@@ -17262,12 +17257,12 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1980,Aviation,Air Systems,172,152,20,0
 1980,Aviation,Avionics,8,8,0,1
 1980,Aviation,Professional Pilot,14,10,4,0
-1980,Business,Accountancy,"1,383",842,541,2
+1980,Business,Accountancy,1383,842,541,2
 1980,Business,Accountancy,146,86,60,3
 1980,Business,Computer Science,69,44,25,1
 1980,Business,Computer Science,148,133,15,1
 1980,Business,Business Administration,409,302,107,4
-1980,Business,Business Administration,"1,005",529,476,1
+1980,Business,Business Administration,1005,529,476,1
 1980,Business,Economics,59,38,21,0
 1980,Business,Economics,101,79,22,0
 1980,Business,Teaching of Spanish,6,0,6,0
@@ -17319,7 +17314,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1980,Engineering,CER ENGR,2,0,2,0
 1980,Engineering,CER ENGR,35,28,7,0
 1980,Engineering,CERAMICS,4,4,0,0
-1980,Engineering,Electrical Engineering,"1,253","1,125",128,0
+1980,Engineering,Electrical Engineering,1253,1125,128,0
 1980,Engineering,Electrical Engineering,6,5,1,0
 1980,Engineering,Electrical Engineering,64,58,6,2
 1980,Engineering,Electrical Engineering,322,309,13,2
@@ -17404,7 +17399,7 @@ Year,College,MajorName,Total,Male,Female,Unknown
 1980,LAS,English,108,50,58,1
 1980,LAS,Entomology,30,23,7,1
 1980,LAS,French,40,7,33,4
-1980,LAS,GEN CURR,"2,408","1,015","1,393",4
+1980,LAS,GEN CURR,2408,1015,1393,4
 1980,LAS,Genetics,6,3,3,0
 1980,LAS,Geography,43,30,13,0
 1980,LAS,Geology,64,45,19,0
