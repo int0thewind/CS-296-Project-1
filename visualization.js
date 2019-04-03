@@ -4,6 +4,9 @@
 const startYear = 1991;
 const endYear = 2018;
 const maximum = 0.35;
+const strokeWidth = 3;
+const radius = 5;
+const opacity = 0.6;
 //to decide which department we want to visualise
 var filterDepartment = function (element) {
   if (element === undefined) { return false; }
@@ -68,11 +71,11 @@ function visualise(data) {
   console.time("general data merging");
   data = mergeData(data);
   console.timeEnd("general data merging");
-  majorVsDepartment(data);
-  departmentVsCampus(data);
+  var collegeData = departmentVsCampus(data);
+  majorVsDepartment(data, collegeData);
 };
 
-var majorVsDepartment = function (data) {
+var majorVsDepartment = function (data, collegeData) {
   var majorVsDepartment_margin = { top: 50, right: 50, bottom: 50, left: 100 };
   var majorVsDepartment_width = 960 - majorVsDepartment_margin.left - majorVsDepartment_margin.right;
   var MajorVsDepartment_height = 500 - majorVsDepartment_margin.top - majorVsDepartment_margin.bottom;
@@ -209,6 +212,7 @@ var departmentVsCampus = function (data) {
     .data(departmentArray)
     .enter()
     .append('line')
+    .attr('id', "departmentVsCampus_lines")
     .attr('x1', 0)
     .attr('x2', departmentVsCampus_width)
     .attr('y1', function (d, i) {
@@ -217,13 +221,24 @@ var departmentVsCampus = function (data) {
     .attr('y2', function (d, i) {
       return ratioScale(d.endPopulation);
     })
-    .attr("stroke-width", 3)
+    .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
       return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + d.collegeTotalStart.toString(10) + ")"
     })
-    .attr('opacity', .6)
-    .on('mouseover', tip.show)
-    .on('mouseout', tip.hide);
+    .attr('opacity', opacity)
+    .on('mouseover', function (d, i) {
+      d3.selectAll("#departmentVsCampus_lines").attr("opacity", opacity - 0.3);
+      d3.select(this)
+        .attr("stroke-width", strokeWidth + 2)
+        .attr("opacity", opacity);
+      tip.show(d, i);
+    })
+    .on('mouseout', function (d, i) {
+      d3.selectAll("#departmentVsCampus_lines").attr("opacity", opacity);
+      d3.select(this)
+        .attr("stroke-width", strokeWidth);
+      tip.hide(d, i);
+    });
 
   departmentVsCampus_svg.selectAll(".points")
     .data(departmentArray)
@@ -233,9 +248,9 @@ var departmentVsCampus = function (data) {
     .attr('cy', function (d, i) {
       return ratioScale(d.startPopulation);
     })
-    .attr('r', 5)
+    .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
-    .attr('opacity', .6)
+    .attr('opacity', opacity);
 
   departmentVsCampus_svg.selectAll(".points")
     .data(departmentArray)
@@ -245,9 +260,9 @@ var departmentVsCampus = function (data) {
     .attr('cy', function (d, i) {
       return ratioScale(d.endPopulation);
     })
-    .attr('r', 5)
+    .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.endRatio); })
-    .attr('opacity', .6);;
+    .attr('opacity', opacity);
 
-
+  return departmentArray;
 }
