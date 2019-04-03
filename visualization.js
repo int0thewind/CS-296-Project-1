@@ -13,8 +13,8 @@ var width = 1500 - margins.left - margins.right;
 var height = 800 - margins.top - margins.bottom;
 var subgraph_width = 100;
 var colorScale = d3.scaleLinear()
-  .domain([0, 1])
-  .range(["#ff9933", "#0099ff"])
+  .domain([0, 0.5, 1])
+  .range(["#ff0033", "#BBBBBB", "#10a7dd"])
 //-------------------------------------------------------
 //              Read CSV
 //-------------------------------------------------------
