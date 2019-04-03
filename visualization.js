@@ -6,7 +6,7 @@ const endYear = 2018;
 const maximum = 0.5;
 const strokeWidth = 3;
 const radius = 4;
-const opacity = 0.6;
+const opacity = 0.7;
 
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1500 - margins.left - margins.right;
@@ -174,10 +174,20 @@ var major = function (svg, offset, data, collegeData) {
   var axisBottomVariable = d3.axisBottom()
     .scale(yearScale);
 
-  var axisGroup = svg.append("g");
-  axisGroup
+  svg.append("g")
     .attr("transform", "translate(" + 0 + "," + height + ")")
     .call(axisBottomVariable);
+
+  for (var i = maximum / 5; i <= maximum; i = i + maximum / 5) {
+    svg.append('line')
+      .attr('x1', offset)
+      .attr('x2', subgraph_width + offset)
+      .attr('y1', ratioScale(i))
+      .attr('y2', ratioScale(i))
+      .attr('opacity', opacity)
+      .attr("stroke-width", 1)
+      .attr("stroke", "gray");
+  }
 
   // Visual Encoding:
   //var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -332,15 +342,35 @@ var departmentVsCampus = function (svg, data) {
   // Axis:
   // var axisRightVariable = d3.axisRight()
   //   .scale(ratioScale);
-  // var axisLeftVariable = d3.axisLeft()
-  //   .scale(ratioScale);
+  var ticks = [];
+  for (var i = maximum / 5; i <= maximum; i = i + maximum / 5) {
+    svg.append('line')
+      .attr('x1', 0)
+      .attr('x2', subgraph_width)
+      .attr('y1', ratioScale(i))
+      .attr('y2', ratioScale(i))
+      .attr('opacity', opacity)
+      .attr("stroke-width", 1)
+      .attr("stroke", "gray");
+
+    ticks.push(i);
+  }
+
+  var axisLeftVariable = d3.axisLeft()
+    .scale(ratioScale)
+    .tickValues(ticks)
+    .tickFormat(d3.format(".0%"));;
+
   var axisBottomVariable = d3.axisBottom()
     .scale(yearScale);
 
-  var axisGroup = svg.append("g");
-  axisGroup
+  svg.append("g")
     .attr("transform", "translate(" + 0 + "," + height + ")")
     .call(axisBottomVariable);
+
+  svg.append("g")
+    .attr("transform", "translate(" + 0 + "," + 0 + ")")
+    .call(axisLeftVariable);
 
   // Visual Encoding:
   //var color = d3.scaleOrdinal(d3.schemeCategory10);
