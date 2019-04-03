@@ -1,8 +1,8 @@
 //-------------------------------------------------------
 //              Global variables here
 //-------------------------------------------------------
-var startYear = 1980;
-var endYear = 2018;
+const startYear = 1980;
+const endYear = 2018;
 //to decide which department we want to visualise
 var filterDepartment = function (element) {
   if (element === undefined) {return false;}
