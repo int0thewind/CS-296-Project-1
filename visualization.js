@@ -14,13 +14,7 @@ var height = 800 - margins.top - margins.bottom;
 var subgraph_width = 100;
 var colorScale = d3.scaleLinear()
   .domain([0, 1])
-  .range(["#ff0066", "#00ccff"])
-//to decide which department we want to visualise
-var filterDepartment = function (element) {
-  if (element === undefined) { return false; }
-  return element != "Social Work" && element != "iSchool" && element != "VetMed" && element != "Labor and Industrial Relations" && element != "Law";
-}
-
+  .range(["#ff9933", "#0099ff"])
 //-------------------------------------------------------
 //              Read CSV
 //-------------------------------------------------------
@@ -67,6 +61,11 @@ function mergeData(data) {
     }
   });
   return newData;
+}
+//to decide which department we want to visualise
+var filterDepartment = function (element) {
+  if (element === undefined) { return false; }
+  return element != "Social Work" && element != "iSchool" && element != "VetMed" && element != "Labor and Industrial Relations" && element != "Law";
 }
 
 //-------------------------------------------------------
@@ -345,10 +344,6 @@ var departmentVsCampus = function (svg, data) {
 
   // Visual Encoding:
   //var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-  var colorScale = d3.scaleLinear()
-    .domain([0, 1])
-    .range(["#ff0066", "#00ccff"])
 
   var defs = svg.append("defs");
 
