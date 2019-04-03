@@ -12,6 +12,9 @@ var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1500 - margins.left - margins.right;
 var height = 800 - margins.top - margins.bottom;
 var subgraph_width = 100;
+var colorScale = d3.scaleLinear()
+  .domain([0, 1])
+  .range(["#ff0066", "#00ccff"])
 //to decide which department we want to visualise
 var filterDepartment = function (element) {
   if (element === undefined) { return false; }
@@ -170,30 +173,23 @@ var major = function (svg, offset, data, collegeData) {
     .call(axisBottomVariable);
 
   // Visual Encoding:
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
-
-  var colorScale = d3.scaleLinear()
-    .domain([0, 1])
-    .range(["#ff0066", "#00ccff"])
+  //var color = d3.scaleOrdinal(d3.schemeCategory10);
 
   var defs = svg.append("defs");
 
   majorArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.majorTotalEnd.toString(10) + element.majorTotalStart.toString(10));
-    //Diagonal gradient
-    linearGradient
-      .attr("x1", "0%")
-      .attr("y1", "0%")
-      .attr("x2", "0%")
-      .attr("y2", "100%");
+      .attr("id", "linear-gradient" + element.majorTotalEnd.toString(10) + "-" + element.majorTotalStart.toString(10));
+
     //Set the color for the start (0%)
     linearGradient.append("stop")
-      .attr("offset", "0%")
+      .attr('class', 'stop-left')
+      .attr('offset', '0')
       .attr("stop-color", colorScale(element.startRatio));
     //Set the color for the end (100%)
     linearGradient.append("stop")
-      .attr("offset", "100%")
+      .attr('class', 'stop-right')
+      .attr("offset", "1")
       .attr("stop-color", colorScale(element.endRatio));
   });
 
@@ -220,7 +216,7 @@ var major = function (svg, offset, data, collegeData) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.majorTotalEnd.toString(10) + d.majorTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.majorTotalEnd.toString(10) + "-" + d.majorTotalStart.toString(10) + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
@@ -290,7 +286,7 @@ var departmentVsCampus = function (svg, data) {
         return;
       }
     }
-    if(filterDepartment(query.College)){
+    if (filterDepartment(query.College)) {
       array.push(departmentObject(query));
     }
   }
@@ -346,19 +342,16 @@ var departmentVsCampus = function (svg, data) {
 
   departmentArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.collegeTotalEnd.toString(10) + element.collegeTotalStart.toString(10));
-    //Diagonal gradient
-    linearGradient
-      .attr("x1", "0%")
-      .attr("y1", "0%")
-      .attr("x2", "0%")
-      .attr("y2", "100%");
+      .attr("id", "linear-gradient" + element.collegeTotalEnd.toString(10) + "-" + element.collegeTotalStart.toString(10));
+
     //Set the color for the start (0%)
     linearGradient.append("stop")
+      .attr('class', 'stop-left')
       .attr("offset", "0%")
       .attr("stop-color", colorScale(element.startRatio));
     //Set the color for the end (100%)
     linearGradient.append("stop")
+      .attr('class', 'stop-right')
       .attr("offset", "100%")
       .attr("stop-color", colorScale(element.endRatio));
   });
@@ -386,7 +379,7 @@ var departmentVsCampus = function (svg, data) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + d.collegeTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + "-" + d.collegeTotalStart.toString(10) + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
