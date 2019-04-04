@@ -359,7 +359,7 @@ var major = function (svg, offset, data, collegeData) {
       return text + "Campus: " + startYear + ": " + Math.round(data.startPopulationPerCampus * 1000) / 10 + "%" + " | "
               + endYear + ": " + Math.round(data.endPopulationPerCampus * 1000) / 10 + "%";
     } else {
-      return text + "Campus: " +startYear + ": " + Math.round(data.startPopulationPerCollege * 1000) / 10 + "%" + " | "
+      return text + "College: " +startYear + ": " + Math.round(data.startPopulationPerCollege * 1000) / 10 + "%" + " | "
               + endYear + ": " + Math.round(data.endPopulationPerCollege * 1000) / 10 + "%";
     }
   }
