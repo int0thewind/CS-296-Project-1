@@ -157,6 +157,7 @@ function visualise(data) {
   svg.append("text")
     .attr("x", 1130)
     .text("50% Each");
+    
 
   svg.append("text")
     .text("Zoom In")
@@ -165,6 +166,12 @@ function visualise(data) {
     .attr("y", 20)
     .text("Zoom Out")
     .on('click', zoomOut);
+  svg.append("text")
+    .attr("y", 40)
+    .text("Change")
+    .on('click', collegeOrCampus);
+
+
   svg.append("text")
     .attr("x", 0)
     .attr("y",730)
@@ -201,10 +208,6 @@ function visualise(data) {
     .attr("x", 1180)
     .attr("y",730)
     .text("Applied Health Sciences");
-  svg.append("text")
-    .attr("y", 40)
-    .text("Change")
-    .on('click', collegeOrCampus);
 };
 
 var major = function (svg, offset, data, collegeData) {
