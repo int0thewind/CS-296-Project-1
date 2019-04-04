@@ -186,7 +186,7 @@ var major = function (svg, offset, data, collegeData) {
       .attr('y2', ratioScale(i))
       .attr('opacity', opacity)
       .attr("stroke-width", 1)
-      .attr("stroke", "gray");
+      .attr("stroke", "#BBBBBB");
   }
 
   // Visual Encoding:
@@ -351,7 +351,7 @@ var departmentVsCampus = function (svg, data) {
       .attr('y2', ratioScale(i))
       .attr('opacity', opacity)
       .attr("stroke-width", 1)
-      .attr("stroke", "gray");
+      .attr("stroke", "#BBBBBB");
 
     ticks.push(i);
   }
