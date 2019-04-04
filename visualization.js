@@ -159,15 +159,37 @@ function visualise(data) {
     .text("50% Each");
     
 
+  svg.append("rect")
+    .attr("x", 495)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "red");
   svg.append("text")
+    .attr("x", 500)
+    .attr("y", 15)
     .text("Zoom In")
     .on('click', zoomIn);
+  svg.append("rect")
+    .attr("x", 600)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "green");
   svg.append("text")
-    .attr("y", 20)
+    .attr("x", 600)
+    .attr("y", 15)
     .text("Zoom Out")
     .on('click', zoomOut);
+  svg.append("rect")
+    .attr("x", 705)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "blue");
   svg.append("text")
-    .attr("y", 40)
+    .attr("x", 710)
+    .attr("y", 15)
     .text("Change")
     .on('click', collegeOrCampus);
 
