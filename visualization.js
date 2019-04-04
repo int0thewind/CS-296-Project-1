@@ -3,18 +3,18 @@
 //-------------------------------------------------------
 const startYear = 1981;
 const endYear = 2018;
-const maximum = 0.5;
 const strokeWidth = 3;
 const radius = 4;
-const opacity = 0.6;
+const opacity = 0.9;
 
+var maximum = 0.5;
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1500 - margins.left - margins.right;
 var height = 800 - margins.top - margins.bottom;
 var subgraph_width = 100;
 var colorScale = d3.scaleLinear()
-  .domain([0, 1])
-  .range(["#ff9933", "#0099ff"])
+  .domain([0, 0.5, 1])
+  .range(["#ff0033", "#BBBBBB", "#10a7dd"])
 //-------------------------------------------------------
 //              Read CSV
 //-------------------------------------------------------
@@ -27,6 +27,23 @@ $(function () {
     console.timeEnd("visulisation time taken");
   });
 });
+
+/* resize */
+function zoomIn() {
+  maximum /= 2;
+  d3.csv("data_cleaned.csv").then(function (data) {
+    d3.select("svg").remove();
+    visualise(data);
+  });
+}
+
+function zoomOut() {
+  maximum *= 2;
+  d3.csv("data_cleaned.csv").then(function (data) {
+    d3.select("svg").remove();
+    visualise(data);
+  });
+}
 
 //-------------------------------------------------------
 //       Helper functions to process data
@@ -98,15 +115,23 @@ function visualise(data) {
       major(svg, offset, data, element);
     }
   });
+
+  svg.append("text")
+    .text("Zoom In")
+    .on('click', zoomIn);
+  svg.append("text")
+    .attr("y", 20)
+    .text("Zoom Out")
+    .on('click', zoomOut);
 };
 
 var major = function (svg, offset, data, collegeData) {
 
   var majorObject = function (element) {
     if (element.Year === startYear) {
-      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0, startPopulationPerCampus: element.Total, endPopulationPerCampus: 0 };
+      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total - element.Unknown, majorTotalEnd: 0, startPopulationPerCampus: element.Total, endPopulationPerCampus: 0 };
     } else if (element.Year === endYear) {
-      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total, startPopulationPerCampus: 0, endPopulationPerCampus: element.Total };
+      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total - element.Unknown, startPopulationPerCampus: 0, endPopulationPerCampus: element.Total };
     }
     return null;
   }
@@ -174,10 +199,20 @@ var major = function (svg, offset, data, collegeData) {
   var axisBottomVariable = d3.axisBottom()
     .scale(yearScale);
 
-  var axisGroup = svg.append("g");
-  axisGroup
+  svg.append("g")
     .attr("transform", "translate(" + 0 + "," + height + ")")
     .call(axisBottomVariable);
+
+  for (var i = maximum / 5; i <= maximum; i = i + maximum / 5) {
+    svg.append('line')
+      .attr('x1', offset)
+      .attr('x2', subgraph_width + offset)
+      .attr('y1', ratioScale(i))
+      .attr('y2', ratioScale(i))
+      .attr('opacity', opacity)
+      .attr("stroke-width", 1)
+      .attr("stroke", "#BBBBBB");
+  }
 
   // Visual Encoding:
   //var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -186,7 +221,7 @@ var major = function (svg, offset, data, collegeData) {
 
   majorArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.majorTotalEnd.toString(10) + "-" + element.majorTotalStart.toString(10));
+      .attr("id", "linear-gradient" + element.major.replace(/[^a-zA-Z]/g, ""));
 
     //Set the color for the start (0%)
     linearGradient.append("stop")
@@ -223,7 +258,7 @@ var major = function (svg, offset, data, collegeData) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.majorTotalEnd.toString(10) + "-" + d.majorTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.major.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
@@ -240,7 +275,7 @@ var major = function (svg, offset, data, collegeData) {
       tip.hide(d, i);
     });
 
-  svg.selectAll(".points")
+  svg.selectAll(".majorPoints")
     .data(majorArray)
     .enter()
     .append('circle')
@@ -252,7 +287,7 @@ var major = function (svg, offset, data, collegeData) {
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
     .attr('opacity', opacity);
 
-  svg.selectAll(".points")
+  svg.selectAll(".majorPoints")
     .data(majorArray)
     .enter()
     .append('circle')
@@ -269,9 +304,9 @@ var departmentVsCampus = function (svg, data) {
 
   var departmentObject = function (element) {
     if (element.Year === startYear) {
-      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total, collegeTotalEnd: 0 };
+      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total - element.Unknown, collegeTotalEnd: 0 };
     } else if (element.Year === endYear) {
-      return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total };
+      return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total - element.Unknown };
     }
     return null;
   }
@@ -332,15 +367,35 @@ var departmentVsCampus = function (svg, data) {
   // Axis:
   // var axisRightVariable = d3.axisRight()
   //   .scale(ratioScale);
-  // var axisLeftVariable = d3.axisLeft()
-  //   .scale(ratioScale);
+  var ticks = [];
+  for (var i = maximum / 5; i <= maximum; i = i + maximum / 5) {
+    svg.append('line')
+      .attr('x1', 0)
+      .attr('x2', subgraph_width)
+      .attr('y1', ratioScale(i))
+      .attr('y2', ratioScale(i))
+      .attr('opacity', opacity)
+      .attr("stroke-width", 1)
+      .attr("stroke", "#BBBBBB");
+
+    ticks.push(i);
+  }
+
+  var axisLeftVariable = d3.axisLeft()
+    .scale(ratioScale)
+    .tickValues(ticks)
+    .tickFormat(d3.format(".0%"));;
+
   var axisBottomVariable = d3.axisBottom()
     .scale(yearScale);
 
-  var axisGroup = svg.append("g");
-  axisGroup
+  svg.append("g")
     .attr("transform", "translate(" + 0 + "," + height + ")")
     .call(axisBottomVariable);
+
+  svg.append("g")
+    .attr("transform", "translate(" + 0 + "," + 0 + ")")
+    .call(axisLeftVariable);
 
   // Visual Encoding:
   //var color = d3.scaleOrdinal(d3.schemeCategory10);
@@ -349,7 +404,7 @@ var departmentVsCampus = function (svg, data) {
 
   departmentArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.collegeTotalEnd.toString(10) + "-" + element.collegeTotalStart.toString(10));
+      .attr("id", "linear-gradient" + element.department.replace(/[^a-zA-Z]/g, ""));
 
     //Set the color for the start (0%)
     linearGradient.append("stop")
@@ -386,7 +441,7 @@ var departmentVsCampus = function (svg, data) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + "-" + d.collegeTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.department.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
