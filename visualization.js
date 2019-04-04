@@ -7,6 +7,7 @@ const strokeWidth = 3;
 const radius = 4;
 const opacity = 0.9;
 
+var _data = null;
 var majorVsCampus = 0;
 var maximum = 0.5;
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
@@ -20,9 +21,23 @@ var colorScale = d3.scaleLinear()
 //              Read CSV
 //-------------------------------------------------------
 
+// $(window).resize(function () {
+//   if (_data != null) {
+//     var new_width = $("#sizer").width();
+//     if (width != new_width) {
+//       //tip.hide();
+//       //width = new_width;
+//       visualise(_data);
+//     }
+//   }
+// });
+
+
+
 // Using jQuery, read our data and call visualize(...) only once the page is ready:
 $(function () {
   d3.csv("data_cleaned.csv").then(function (data) {
+    _data = data;
     console.time("visulisation time taken");
     visualise(data);
     console.timeEnd("visulisation time taken");
