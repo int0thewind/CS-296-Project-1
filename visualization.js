@@ -10,7 +10,7 @@ const opacity = 0.9;
 var toDisplayCampus = 0;
 var maximum = 0.5;
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
-var width = 1500 - margins.left - margins.right;
+var width = 1400 - margins.left - margins.right;
 var height = 800 - margins.top - margins.bottom;
 var subgraph_width = 100;
 var colorScale = d3.scaleLinear()
@@ -129,17 +129,107 @@ function visualise(data) {
     }
   });
 
+
+  var defs = svg.append("defs");
+  var linearGradient = defs.append("linearGradient")
+    .attr("id", "linear-gradient");
+  linearGradient
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
+  linearGradient.selectAll("stop")
+    .data( colorScale.range() )
+    .enter().append("stop")
+    .attr("offset", function(d,i) { return i/(colorScale.range().length-1); })
+    .attr("stop-color", function(d) { return d; });
+  svg.append("rect")
+    .attr("x", 1000)
+    .attr("width", 300)
+    .attr("height", 20)
+    .style("fill", "url(#linear-gradient)");
   svg.append("text")
+    .attr("x", 970)
+    .text("100% Female");
+  svg.append("text")
+    .attr("x", 1270)
+    .text("100% Male");
+  svg.append("text")
+    .attr("x", 1130)
+    .text("50% Each");
+    
+
+  svg.append("rect")
+    .attr("x", 495)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "red");
+  svg.append("text")
+    .attr("x", 500)
+    .attr("y", 15)
     .text("Zoom In")
     .on('click', zoomIn);
+  svg.append("rect")
+    .attr("x", 600)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "green");
   svg.append("text")
-    .attr("y", 20)
+    .attr("x", 600)
+    .attr("y", 15)
     .text("Zoom Out")
     .on('click', zoomOut);
+  svg.append("rect")
+    .attr("x", 705)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "blue");
   svg.append("text")
-    .attr("y", 40)
+    .attr("x", 710)
+    .attr("y", 15)
     .text("Change")
     .on('click', collegeOrCampus);
+
+
+  svg.append("text")
+    .attr("x", 0)
+    .attr("y",730)
+    .text("Dep. VS Campus");
+  svg.append("text")
+    .attr("x", 175)
+    .attr("y",730)
+    .text("Business");
+  svg.append("text")
+    .attr("x", 330)
+    .attr("y",730)
+    .text("Media");
+  svg.append("text")
+    .attr("x", 465)
+    .attr("y",730)
+    .text("Engineering");
+  svg.append("text")
+    .attr("x", 635)
+    .attr("y",730)
+    .text("ACES");
+  svg.append("text")
+    .attr("x", 785)
+    .attr("y",730)
+    .text("LAS");
+  svg.append("text")
+    .attr("x", 890)
+    .attr("y",730)
+    .text("Fine and Applied Arts");
+  svg.append("text")
+    .attr("x", 1070)
+    .attr("y",730)
+    .text("Education");
+  svg.append("text")
+    .attr("x", 1180)
+    .attr("y",730)
+    .text("Applied Health Sciences");
 };
 
 var major = function (svg, offset, data, collegeData) {

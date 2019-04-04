@@ -1,12 +1,19 @@
 <!doctype html>
 <html>
   <style>
+    head{
+
+    }
     body {
+      margin-left: 2%;
+      margin-right: 0px;
+      margin-top: 5%;
+    }
+    footer{
       font-family: monospace;
-      margin-left: 15%;
-      margin-right: 15%;
-      margin-top: 30px;
-      padding: 1em 2em 4em 2em
+      margin-left: 0px;
+      margin-right: 0px;
+      margin-top: 5%;
     }
     #title {
       text-align: center;
@@ -15,7 +22,17 @@
     #subtile {
       text-align: right;
     }
-
+    #colorstrip{
+    padding-top: 10px ;
+    padding-left: 10px;
+    width: 100%; height: 10%;
+    background-color: #E84A27;
+    opacity: 1%;
+    }
+    #logo1{
+      font-family: sans-serif;
+      color: white;
+    }
   </style>
   <head>
     <title>The project "what the hell is the name"</title>
@@ -34,14 +51,23 @@
 
     <!-- Our visualization code -->
     <script src="visualization.js"></script>
+    <h1 id="title">What the hell is the name</h1>
+    <h4 id="subtile">--Colleges and Departments structure Change in UIUC</h4>
   </head>
 
   <body>
-    <h1 id="title">What the hell is the name</h1>
-    <h4 id="subtile">--Colleges and Departments structure Change in UIUC</h4>
-    <div class="container">
-      <div id="svg"></div>
+    <div class="w3-container w3-blue">
+      <div id="svg" style="width:1000px"></div>
     </div>
   </body>
 
+  <footer>
+    <div id="colorstrip"/>
+    <h6 id="logo1">CS296-25: Data driven visualization</h6>
+    <p>
+      <h6 style="font-family:fantasy;">Authored by: Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, Jiangran Wang.</h6>
+      <img onmouseover="swag(this)" src="illini.png" height="100px">
+      <h6 style="font-family:monospace;">>>>Data Source: http://dmi.illinois.edu/stuenr/#race, precleaned by Dr. Wade Fagen-Ulmschneider</h6>
+    </p>
+  </footer>
 </html>
