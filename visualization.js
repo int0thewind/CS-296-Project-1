@@ -6,7 +6,7 @@ const endYear = 2018;
 const maximum = 0.5;
 const strokeWidth = 3;
 const radius = 4;
-const opacity = 0.7;
+const opacity = 0.9;
 
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1500 - margins.left - margins.right;
@@ -104,9 +104,9 @@ var major = function (svg, offset, data, collegeData) {
 
   var majorObject = function (element) {
     if (element.Year === startYear) {
-      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total, majorTotalEnd: 0, startPopulationPerCampus: element.Total, endPopulationPerCampus: 0 };
+      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total - element.Unknown, majorTotalEnd: 0, startPopulationPerCampus: element.Total, endPopulationPerCampus: 0 };
     } else if (element.Year === endYear) {
-      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total, startPopulationPerCampus: 0, endPopulationPerCampus: element.Total };
+      return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total - element.Unknown, startPopulationPerCampus: 0, endPopulationPerCampus: element.Total };
     }
     return null;
   }
@@ -279,9 +279,9 @@ var departmentVsCampus = function (svg, data) {
 
   var departmentObject = function (element) {
     if (element.Year === startYear) {
-      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total, collegeTotalEnd: 0 };
+      return { department: element.College, startPopulation: element.Total, endPopulation: 0, startRatio: element.Male, endRatio: 0, collegeTotalStart: element.Total - element.Unknown, collegeTotalEnd: 0 };
     } else if (element.Year === endYear) {
-      return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total };
+      return { department: element.College, startPopulation: 0, endPopulation: element.Total, startRatio: 0, endRatio: element.Male, collegeTotalStart: 0, collegeTotalEnd: element.Total - element.Unknown };
     }
     return null;
   }
