@@ -7,6 +7,7 @@ const strokeWidth = 3;
 const radius = 4;
 const opacity = 0.9;
 
+var majorVsCampus = 0;
 var maximum = 0.5;
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1500 - margins.left - margins.right;
@@ -43,6 +44,18 @@ function zoomOut() {
     d3.select("svg").remove();
     visualise(data);
   });
+}
+
+function collegeOrCampus() {
+  if (majorVsCampus) {
+    maximum /= 2;
+    majorVsCampus = 0;
+    zoomOut();
+  } else {
+    maximum *= 2;
+    majorVsCampus = 1;
+    zoomIn();
+  }
 }
 
 //-------------------------------------------------------
@@ -159,6 +172,10 @@ function visualise(data) {
     .attr("x", 1180)
     .attr("y",730)
     .text("Applied Health Sciences");
+  svg.append("text")
+    .attr("y", 40)
+    .text("Change")
+    .on('click', collegeOrCampus);
 };
 
 var major = function (svg, offset, data, collegeData) {
@@ -217,7 +234,7 @@ var major = function (svg, offset, data, collegeData) {
       element.endRatio = 0.5;
   });
 
-  console.log(majorArray);
+  //console.log(majorArray);
 
   //Scale
   var ratioScale = d3.scaleLinear()
@@ -283,7 +300,7 @@ var major = function (svg, offset, data, collegeData) {
     .data(majorArray)
     .enter()
     .append('line')
-    .attr('id', "major_lines")
+    .attr('id', "majorVsCollege_lines")
     .attr('x1', offset)
     .attr('x2', subgraph_width + offset)
     .attr('y1', function (d, i) {
@@ -297,15 +314,16 @@ var major = function (svg, offset, data, collegeData) {
       return "url(#" + "linear-gradient" + d.major.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
+    .attr('visibility', majorVsCampus ? "hidden" : "visible")
     .on('mouseover', function (d, i) {
-      d3.selectAll("#major_lines").attr("opacity", opacity - 0.3);
+      d3.selectAll("#majorVsCollege_lines").attr("opacity", opacity - 0.3);
       d3.select(this)
         .attr("stroke-width", strokeWidth + 2)
         .attr("opacity", opacity);
       tip.show(d, i);
     })
     .on('mouseout', function (d, i) {
-      d3.selectAll("#major_lines").attr("opacity", opacity);
+      d3.selectAll("#majorVsCollege_lines").attr("opacity", opacity);
       d3.select(this)
         .attr("stroke-width", strokeWidth);
       tip.hide(d, i);
@@ -315,25 +333,90 @@ var major = function (svg, offset, data, collegeData) {
     .data(majorArray)
     .enter()
     .append('circle')
+    .attr('id', "majorVsCollege_points")
     .attr('cx', offset)
     .attr('cy', function (d, i) {
       return ratioScale(d.startPopulationPerCollege);
     })
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
-    .attr('opacity', opacity);
+    .attr('opacity', opacity)
+    .attr('visibility', majorVsCampus ? "hidden" : "visible");
 
   svg.selectAll(".majorPoints")
     .data(majorArray)
     .enter()
     .append('circle')
+    .attr('id', "majorVsCollege_points")
     .attr('cx', subgraph_width + offset)
     .attr('cy', function (d, i) {
       return ratioScale(d.endPopulationPerCollege);
     })
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.endRatio); })
-    .attr('opacity', opacity);
+    .attr('opacity', opacity)
+    .attr('visibility', majorVsCampus ? "hidden" : "visible");
+
+  svg.selectAll(".major_slopes")
+    .data(majorArray)
+    .enter()
+    .append('line')
+    .attr('id', "majorVsCampus_lines")
+    .attr('x1', offset)
+    .attr('x2', subgraph_width + offset)
+    .attr('y1', function (d, i) {
+      return ratioScale(d.startPopulationPerCampus);
+    })
+    .attr('y2', function (d, i) {
+      return ratioScale(d.endPopulationPerCampus);
+    })
+    .attr("stroke-width", strokeWidth)
+    .attr('stroke', function (d, i) {
+      return "url(#" + "linear-gradient" + d.major.replace(/[^a-zA-Z]/g, "") + ")"
+    })
+    .attr('opacity', opacity)
+    .attr('visibility', majorVsCampus == 0 ? "hidden" : "visible")
+    .on('mouseover', function (d, i) {
+      d3.selectAll("#majorVsCampus_lines").attr("opacity", opacity - 0.3);
+      d3.select(this)
+        .attr("stroke-width", strokeWidth + 2)
+        .attr("opacity", opacity);
+      tip.show(d, i);
+    })
+    .on('mouseout', function (d, i) {
+      d3.selectAll("#majorVsCampus_lines").attr("opacity", opacity);
+      d3.select(this)
+        .attr("stroke-width", strokeWidth);
+      tip.hide(d, i);
+    });
+
+  svg.selectAll(".majorPoints")
+    .data(majorArray)
+    .enter()
+    .append('circle')
+    .attr('id', "majorVsCampus_points")
+    .attr('cx', offset)
+    .attr('cy', function (d, i) {
+      return ratioScale(d.startPopulationPerCampus);
+    })
+    .attr('r', radius)
+    .attr('fill', function (d, i) { return colorScale(d.startRatio); })
+    .attr('opacity', opacity)
+    .attr('visibility', majorVsCampus == 0 ? "hidden" : "visible");
+
+  svg.selectAll(".majorPoints")
+    .data(majorArray)
+    .enter()
+    .append('circle')
+    .attr('id', "majorVsCampus_points")
+    .attr('cx', subgraph_width + offset)
+    .attr('cy', function (d, i) {
+      return ratioScale(d.endPopulationPerCampus);
+    })
+    .attr('r', radius)
+    .attr('fill', function (d, i) { return colorScale(d.endRatio); })
+    .attr('opacity', opacity)
+    .attr('visibility', majorVsCampus == 0 ? "hidden" : "visible");
 }
 
 var departmentVsCampus = function (svg, data) {
