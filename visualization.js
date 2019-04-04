@@ -190,7 +190,7 @@ function visualise(data) {
   svg.append("text")
     .attr("x", 710)
     .attr("y", 15)
-    .text("Dispaly Major VS  " + (majorVsCampus == 0 ? "College" : "Campus"))
+    .text("Dispaly Major VS  " + (toDisplayCampus == 0 ? "College" : "Campus"))
     .on('click', collegeOrCampus);
 
   svg.append("text")
