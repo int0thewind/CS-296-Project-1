@@ -183,16 +183,15 @@ function visualise(data) {
     .on('click', zoomOut);
   svg.append("rect")
     .attr("x", 705)
-    .attr("width", 60)
+    .attr("width", 155)
     .attr("height", 20)
     .attr("opacity", 0.5)
     .style("fill", "blue");
   svg.append("text")
     .attr("x", 710)
     .attr("y", 15)
-    .text("Change")
+    .text("Dispaly Major VS  " + (majorVsCampus == 0 ? "College" : "Campus"))
     .on('click', collegeOrCampus);
-
 
   svg.append("text")
     .attr("x", 0)
