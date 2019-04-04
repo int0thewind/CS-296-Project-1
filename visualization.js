@@ -123,10 +123,6 @@ function visualise(data) {
     .attr("y", 20)
     .text("Zoom Out")
     .on('click', zoomOut);
-  // svg.append("circle")
-  //   .attr("cx",0)
-  //   .attr("cy",0)
-  //   .attr("r",1);
 };
 
 var major = function (svg, offset, data, collegeData) {
