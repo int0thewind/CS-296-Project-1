@@ -1,8 +1,13 @@
 <!doctype html>
 <html>
-  <style>
-    head{
+<style>
+  body {
+    margin-left: 2%;
+    margin-right: 0px;
+    margin-top: 5%;
+  }
 
+<<<<<<< HEAD
     }
     body {
       margin-left: 2%;
@@ -26,10 +31,32 @@
     }
     #colorstrip{
     padding-top: 10px ;
+=======
+  footer {
+    font-family: monospace;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 5%;
+  }
+
+  #title {
+    text-align: center;
+    color: #13294B;
+  }
+
+  #subtile {
+    text-align: right;
+  }
+
+  #colorstrip {
+    padding-top: 10px;
+>>>>>>> 3427486f44bb4ed865e39c2b473a4b9ea56510e2
     padding-left: 10px;
-    width: 100%; height: 10%;
+    width: 100%;
+    height: 10%;
     background-color: #E84A27;
     opacity: 1%;
+<<<<<<< HEAD
     }
     #astrip{
     align-self: flex-start;
@@ -46,38 +73,63 @@
   </style>
   <head>
     <title>The project "what the hell is the name"</title>
+=======
+  }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="style.css" rel="stylesheet">
+  #logo1 {
+    font-family: sans-serif;
+    color: white;
+  }
+</style>
 
-    <!-- jQuery and lodash -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+<head>
+  <title>The project "what the hell is the name"</title>
 
-    <!-- d3.js -->
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="d3-tip.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+>>>>>>> 3427486f44bb4ed865e39c2b473a4b9ea56510e2
 
-    <!-- Our visualization code -->
-    <script src="visualization.js"></script>
-    <h1 id="title">What the hell is the name</h1>
-    <h4 id="subtile">--Colleges and Departments structure Change in UIUC</h4>
-  </head>
+  <!-- jQuery and lodash -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
 
+  <!-- d3.js -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="d3-tip.js"></script>
+
+  <!-- Our visualization code -->
+  <script src="visualization.js"></script>
+  <h1 id="title">What the hell is the name</h1>
+  <h4 id="subtile">--Colleges and Departments structure Change in UIUC</h4>
+</head>
+
+<body>
+  <div class="container" style="margin-left: 20px">
+    <div id="svg"></div>
+  </div>
+</body>
+
+<<<<<<< HEAD
   <body>
     <div class="w3-container w3-blue">
       <div id="svg"></div>
     </div>
   </body>
+=======
+<footer>
+  <div id="colorstrip" />
+  <h6 id="logo1">CS296-25: Data driven visualization</h6>
+  <p>
+    <h6 style="font-family:fantasy;">Authored by: Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, Jiangran Wang.</h6>
+    <img onmouseover="swag(this)" src="illini.png" height="100px">
+    <h6 style="font-family:monospace;">>>>Data Source: http://dmi.illinois.edu/stuenr/#race, precleaned by Dr. Wade
+      Fagen-Ulmschneider</h6>
+  </p>
+</footer>
+>>>>>>> 3427486f44bb4ed865e39c2b473a4b9ea56510e2
 
-  <footer>
-    <div id="colorstrip"/>
-    <h6 id="logo1">CS296-25: Data driven visualization</h6>
-    <p>
-      <h6 style="font-family:fantasy;">Authored by: Mingjie Zhao, Hanzhi Yin, Zhengguan Dai, Jiangran Wang.</h6>
-      <img onmouseover="swag(this)" src="illini.png" height="100px">
-      <h6 style="font-family:monospace;">>>>Data Source: http://dmi.illinois.edu/stuenr/#race, precleaned by Dr. Wade Fagen-Ulmschneider</h6>
-    </p>
-  </footer>
 </html>
