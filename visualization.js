@@ -129,6 +129,35 @@ function visualise(data) {
     }
   });
 
+
+  var defs = svg.append("defs");
+  var linearGradient = defs.append("linearGradient")
+    .attr("id", "linear-gradient");
+  linearGradient
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
+  linearGradient.selectAll("stop")
+    .data( colorScale.range() )
+    .enter().append("stop")
+    .attr("offset", function(d,i) { return i/(colorScale.range().length-1); })
+    .attr("stop-color", function(d) { return d; });
+  svg.append("rect")
+    .attr("x", 1000)
+    .attr("width", 300)
+    .attr("height", 20)
+    .style("fill", "url(#linear-gradient)");
+  svg.append("text")
+    .attr("x", 970)
+    .text("100% Female");
+  svg.append("text")
+    .attr("x", 1270)
+    .text("100% Male");
+  svg.append("text")
+    .attr("x", 1130)
+    .text("50% Each");
+
   svg.append("text")
     .text("Zoom In")
     .on('click', zoomIn);
