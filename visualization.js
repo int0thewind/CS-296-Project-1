@@ -29,7 +29,7 @@ $(function () {
 });
 
 /* resize */
-function zoomIn () {
+function zoomIn() {
   maximum /= 2;
   d3.csv("data_cleaned.csv").then(function (data) {
     d3.select("svg").remove();
@@ -37,7 +37,7 @@ function zoomIn () {
   });
 }
 
-function zoomOut () {
+function zoomOut() {
   maximum *= 2;
   d3.csv("data_cleaned.csv").then(function (data) {
     d3.select("svg").remove();
@@ -115,6 +115,14 @@ function visualise(data) {
       major(svg, offset, data, element);
     }
   });
+
+  svg.append("text")
+    .text("Zoom In")
+    .on('click', zoomIn);
+  svg.append("text")
+    .attr("y", 20)
+    .text("Zoom Out")
+    .on('click', zoomOut);
 };
 
 var major = function (svg, offset, data, collegeData) {
@@ -213,7 +221,7 @@ var major = function (svg, offset, data, collegeData) {
 
   majorArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.majorTotalEnd.toString(10) + "-" + element.majorTotalStart.toString(10));
+      .attr("id", "linear-gradient" + element.major.replace(/[^a-zA-Z]/g, ""));
 
     //Set the color for the start (0%)
     linearGradient.append("stop")
@@ -250,7 +258,7 @@ var major = function (svg, offset, data, collegeData) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.majorTotalEnd.toString(10) + "-" + d.majorTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.major.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
@@ -267,7 +275,7 @@ var major = function (svg, offset, data, collegeData) {
       tip.hide(d, i);
     });
 
-  svg.selectAll(".points")
+  svg.selectAll(".majorPoints")
     .data(majorArray)
     .enter()
     .append('circle')
@@ -279,7 +287,7 @@ var major = function (svg, offset, data, collegeData) {
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
     .attr('opacity', opacity);
 
-  svg.selectAll(".points")
+  svg.selectAll(".majorPoints")
     .data(majorArray)
     .enter()
     .append('circle')
@@ -396,7 +404,7 @@ var departmentVsCampus = function (svg, data) {
 
   departmentArray.forEach(element => {
     var linearGradient = defs.append(("linearGradient"))
-      .attr("id", "linear-gradient" + element.collegeTotalEnd.toString(10) + "-" + element.collegeTotalStart.toString(10));
+      .attr("id", "linear-gradient" + element.department.replace(/[^a-zA-Z]/g, ""));
 
     //Set the color for the start (0%)
     linearGradient.append("stop")
@@ -433,7 +441,7 @@ var departmentVsCampus = function (svg, data) {
     })
     .attr("stroke-width", strokeWidth)
     .attr('stroke', function (d, i) {
-      return "url(#" + "linear-gradient" + d.collegeTotalEnd.toString(10) + "-" + d.collegeTotalStart.toString(10) + ")"
+      return "url(#" + "linear-gradient" + d.department.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
     .on('mouseover', function (d, i) {
