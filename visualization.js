@@ -7,7 +7,7 @@ const strokeWidth = 3;
 const radius = 4;
 const opacity = 0.9;
 
-var majorVsCampus = 0;
+var toDisplayCampus = 0;
 var maximum = 0.5;
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1400 - margins.left - margins.right;
@@ -30,7 +30,7 @@ $(function () {
 });
 
 /* resize */
-function zoomIn() {
+function zoomIn() { 
   maximum /= 2;
   d3.csv("data_cleaned.csv").then(function (data) {
     d3.select("svg").remove();
@@ -47,13 +47,13 @@ function zoomOut() {
 }
 
 function collegeOrCampus() {
-  if (majorVsCampus) {
+  if (toDisplayCampus) {
     maximum /= 2;
-    majorVsCampus = 0;
+    toDisplayCampus = 0;
     zoomOut();
   } else {
     maximum *= 2;
-    majorVsCampus = 1;
+    toDisplayCampus = 1;
     zoomIn();
   }
 }
@@ -235,12 +235,21 @@ var major = function (svg, offset, data, collegeData) {
 
   var majorObject = function (element) {
     if (element.Year === startYear) {
-      return { major: element.MajorName, startPopulationPerCollege: element.Total, endPopulationPerCollege: 0, startRatio: element.Male, endRatio: 0, majorTotalStart: element.Total - element.Unknown, majorTotalEnd: 0, startPopulationPerCampus: element.Total, endPopulationPerCampus: 0 };
+      return { major: element.MajorName,
+        startPopulationPerCollege: element.Total,
+        endPopulationPerCollege: 0,
+        startRatio: element.Male,
+        endRatio: 0,
+        majorTotalStart: element.Total - element.Unknown,
+        majorTotalEnd: 0,
+        startPopulationPerCampus: element.Total,
+        endPopulationPerCampus: 0 };
     } else if (element.Year === endYear) {
       return { major: element.MajorName, startPopulationPerCollege: 0, endPopulationPerCollege: element.Total, startRatio: 0, endRatio: element.Male, majorTotalStart: 0, majorTotalEnd: element.Total - element.Unknown, startPopulationPerCampus: 0, endPopulationPerCampus: element.Total };
     }
     return null;
   }
+
   var majorArrayAppender = function (array, query) {
     //if (query === null) {return;}
     if (collegeData.department === query.College) {
@@ -341,11 +350,33 @@ var major = function (svg, offset, data, collegeData) {
       .attr("stop-color", colorScale(element.endRatio));
   });
 
+  function appendCampusOrCollegeRatio (data) {
+    if (toDisplayCampus) {
+      return startYear + ": " + Math.round(data.startPopulationPerCampus * 1000) / 10 + "%" + " | "
+              + endYear + ": " + Math.round(data.endPopulationPerCampus * 1000) / 10 + "%";
+    } else {
+      return startYear + ": " + Math.round(data.startPopulationPerCollege * 1000) / 10 + "%" + " | "
+              + endYear + ": " + Math.round(data.endPopulationPerCollege * 1000) / 10 + "%";
+    }
+  }
+
+  function appendMaleOrFemaleRatio(data) {
+    return "Male ratio at " + startYear + ": " + Math.round(data.startRatio * 1000) / 10 + "%" + " | "
+            + endYear + ": " + Math.round(data.endRatio * 1000) / 10 + "%";
+  }
+
   //Tip
+  
   var tip = d3.tip()
     .attr('class', 'd3-tip')
-    .html(function (d, i) {
-      return d.major;
+    .html(function (d) {
+      return d.major
+      + "<div style=\"font-size: 0.75rem\">"
+      + appendCampusOrCollegeRatio(d)
+      + "<br>"
+      + appendMaleOrFemaleRatio(d)
+      + "</div>";
+      
     });
   svg.call(tip);
 
@@ -367,7 +398,7 @@ var major = function (svg, offset, data, collegeData) {
       return "url(#" + "linear-gradient" + d.major.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
-    .attr('visibility', majorVsCampus ? "hidden" : "visible")
+    .attr('visibility', toDisplayCampus ? "hidden" : "visible")
     .on('mouseover', function (d, i) {
       d3.selectAll("#majorVsCollege_lines").attr("opacity", opacity - 0.3);
       d3.select(this)
@@ -394,7 +425,7 @@ var major = function (svg, offset, data, collegeData) {
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
     .attr('opacity', opacity)
-    .attr('visibility', majorVsCampus ? "hidden" : "visible");
+    .attr('visibility', toDisplayCampus ? "hidden" : "visible");
 
   svg.selectAll(".majorPoints")
     .data(majorArray)
@@ -408,13 +439,13 @@ var major = function (svg, offset, data, collegeData) {
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.endRatio); })
     .attr('opacity', opacity)
-    .attr('visibility', majorVsCampus ? "hidden" : "visible");
+    .attr('visibility', toDisplayCampus ? "hidden" : "visible");
 
   svg.selectAll(".major_slopes")
     .data(majorArray)
     .enter()
     .append('line')
-    .attr('id', "majorVsCampus_lines")
+    .attr('id', "toDisplayCampus_lines")
     .attr('x1', offset)
     .attr('x2', subgraph_width + offset)
     .attr('y1', function (d, i) {
@@ -428,16 +459,16 @@ var major = function (svg, offset, data, collegeData) {
       return "url(#" + "linear-gradient" + d.major.replace(/[^a-zA-Z]/g, "") + ")"
     })
     .attr('opacity', opacity)
-    .attr('visibility', majorVsCampus == 0 ? "hidden" : "visible")
+    .attr('visibility', toDisplayCampus == 0 ? "hidden" : "visible")
     .on('mouseover', function (d, i) {
-      d3.selectAll("#majorVsCampus_lines").attr("opacity", opacity - 0.3);
+      d3.selectAll("#toDisplayCampus_lines").attr("opacity", opacity - 0.3);
       d3.select(this)
         .attr("stroke-width", strokeWidth + 2)
         .attr("opacity", opacity);
       tip.show(d, i);
     })
     .on('mouseout', function (d, i) {
-      d3.selectAll("#majorVsCampus_lines").attr("opacity", opacity);
+      d3.selectAll("#toDisplayCampus_lines").attr("opacity", opacity);
       d3.select(this)
         .attr("stroke-width", strokeWidth);
       tip.hide(d, i);
@@ -447,7 +478,7 @@ var major = function (svg, offset, data, collegeData) {
     .data(majorArray)
     .enter()
     .append('circle')
-    .attr('id', "majorVsCampus_points")
+    .attr('id', "toDisplayCampus_points")
     .attr('cx', offset)
     .attr('cy', function (d, i) {
       return ratioScale(d.startPopulationPerCampus);
@@ -455,13 +486,13 @@ var major = function (svg, offset, data, collegeData) {
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.startRatio); })
     .attr('opacity', opacity)
-    .attr('visibility', majorVsCampus == 0 ? "hidden" : "visible");
+    .attr('visibility', toDisplayCampus == 0 ? "hidden" : "visible");
 
   svg.selectAll(".majorPoints")
     .data(majorArray)
     .enter()
     .append('circle')
-    .attr('id', "majorVsCampus_points")
+    .attr('id', "toDisplayCampus_points")
     .attr('cx', subgraph_width + offset)
     .attr('cy', function (d, i) {
       return ratioScale(d.endPopulationPerCampus);
@@ -469,7 +500,7 @@ var major = function (svg, offset, data, collegeData) {
     .attr('r', radius)
     .attr('fill', function (d, i) { return colorScale(d.endRatio); })
     .attr('opacity', opacity)
-    .attr('visibility', majorVsCampus == 0 ? "hidden" : "visible");
+    .attr('visibility', toDisplayCampus == 0 ? "hidden" : "visible");
 }
 
 var departmentVsCampus = function (svg, data) {
@@ -590,11 +621,25 @@ var departmentVsCampus = function (svg, data) {
       .attr("stop-color", colorScale(element.endRatio));
   });
 
-  //Tip
+  function appendCampusOrCollegeRatio (data) {
+    return startYear + ": " + Math.round(data.startPopulation * 1000) / 10 + "%" + " | "
+              + endYear + ": " + Math.round(data.endPopulation * 1000) / 10 + "%";
+  }
+
+  function appendMaleOrFemaleRatio(data) {
+    return "Male ratio at " + startYear + ": " + Math.round(data.startRatio * 1000) / 10 + "%" + " | "
+            + endYear + ": " + Math.round(data.endRatio * 1000) / 10 + "%";
+  }
+
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .html(function (d, i) {
-      return d.department;
+      return d.department
+      + "<div style=\"font-size: 0.75rem\">"
+      + appendCampusOrCollegeRatio(d)
+      + "<br>"
+      + appendMaleOrFemaleRatio(d)
+      + "</div>";
     });
   svg.call(tip);
 
