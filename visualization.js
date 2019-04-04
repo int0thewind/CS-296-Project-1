@@ -168,6 +168,7 @@ function visualise(data) {
   svg.append("text")
     .attr("x", 500)
     .attr("y", 15)
+    .attr("fill", "white")
     .text("Zoom In")
     .on('click', zoomIn);
   svg.append("rect")
@@ -179,6 +180,7 @@ function visualise(data) {
   svg.append("text")
     .attr("x", 600)
     .attr("y", 15)
+    .attr("fill", "white")
     .text("Zoom Out")
     .on('click', zoomOut);
   svg.append("rect")
@@ -190,6 +192,7 @@ function visualise(data) {
   svg.append("text")
     .attr("x", 710)
     .attr("y", 15)
+    .attr("fill", "white")
     .text("Dispaly Major VS  " + (toDisplayCampus == 0 ? "College" : "Campus"))
     .on('click', collegeOrCampus);
 
@@ -351,11 +354,12 @@ var major = function (svg, offset, data, collegeData) {
   });
 
   function appendCampusOrCollegeRatio (data) {
+    var text = "Major/";
     if (toDisplayCampus) {
-      return startYear + ": " + Math.round(data.startPopulationPerCampus * 1000) / 10 + "%" + " | "
+      return text + "Campus: " + startYear + ": " + Math.round(data.startPopulationPerCampus * 1000) / 10 + "%" + " | "
               + endYear + ": " + Math.round(data.endPopulationPerCampus * 1000) / 10 + "%";
     } else {
-      return startYear + ": " + Math.round(data.startPopulationPerCollege * 1000) / 10 + "%" + " | "
+      return text + "Campus: " +startYear + ": " + Math.round(data.startPopulationPerCollege * 1000) / 10 + "%" + " | "
               + endYear + ": " + Math.round(data.endPopulationPerCollege * 1000) / 10 + "%";
     }
   }
@@ -622,7 +626,7 @@ var departmentVsCampus = function (svg, data) {
   });
 
   function appendCampusOrCollegeRatio (data) {
-    return startYear + ": " + Math.round(data.startPopulation * 1000) / 10 + "%" + " | "
+    return "College/Campus: " + startYear + ": " + Math.round(data.startPopulation * 1000) / 10 + "%" + " | "
               + endYear + ": " + Math.round(data.endPopulation * 1000) / 10 + "%";
   }
 
