@@ -3,11 +3,11 @@
 //-------------------------------------------------------
 const startYear = 1981;
 const endYear = 2018;
-const maximum = 0.5;
 const strokeWidth = 3;
 const radius = 4;
 const opacity = 0.9;
 
+var maximum = 0.5;
 var margins = { top: 50, right: 50, bottom: 50, left: 50 };
 var width = 1500 - margins.left - margins.right;
 var height = 800 - margins.top - margins.bottom;
@@ -27,6 +27,23 @@ $(function () {
     console.timeEnd("visulisation time taken");
   });
 });
+
+/* resize */
+function zoomIn () {
+  maximum /= 2;
+  d3.csv("data_cleaned.csv").then(function (data) {
+    d3.select("svg").remove();
+    visualise(data);
+  });
+}
+
+function zoomOut () {
+  maximum *= 2;
+  d3.csv("data_cleaned.csv").then(function (data) {
+    d3.select("svg").remove();
+    visualise(data);
+  });
+}
 
 //-------------------------------------------------------
 //       Helper functions to process data
