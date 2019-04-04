@@ -172,14 +172,43 @@ function visualise(data) {
   svg.append("text")
     .attr("x", 1130)
     .text("50% Each");
+    
 
+  svg.append("rect")
+    .attr("x", 495)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "red");
   svg.append("text")
+    .attr("x", 500)
+    .attr("y", 15)
     .text("Zoom In")
     .on('click', zoomIn);
+  svg.append("rect")
+    .attr("x", 600)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "green");
   svg.append("text")
-    .attr("y", 20)
+    .attr("x", 600)
+    .attr("y", 15)
     .text("Zoom Out")
     .on('click', zoomOut);
+  svg.append("rect")
+    .attr("x", 705)
+    .attr("width", 60)
+    .attr("height", 20)
+    .attr("opacity", 0.5)
+    .style("fill", "blue");
+  svg.append("text")
+    .attr("x", 710)
+    .attr("y", 15)
+    .text("Change")
+    .on('click', collegeOrCampus);
+
+
   svg.append("text")
     .attr("x", 0)
     .attr("y",730)
@@ -216,10 +245,6 @@ function visualise(data) {
     .attr("x", 1180)
     .attr("y",730)
     .text("Applied Health Sciences");
-  svg.append("text")
-    .attr("y", 40)
-    .text("Change")
-    .on('click', collegeOrCampus);
 };
 
 var major = function (svg, offset, data, collegeData) {
